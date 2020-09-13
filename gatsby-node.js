@@ -1,5 +1,3 @@
-'use strict'
-
 const path = require('path')
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -34,7 +32,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         name: 'layout',
         value: layout || ''
       })
+      break
     }
+    default:
   }
 }
 
@@ -63,6 +63,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
   allMarkdown.data.allMarkdownRemark.edges.forEach(({ node }) => {
     const { slug, layout } = node.fields
+
+    console.log(slug)
 
     createPage({
       path: slug,
