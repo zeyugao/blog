@@ -1,4 +1,4 @@
-name: Frontend
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
         run: |
           CINFO="$(git log -1 --pretty="%an: [%h] %s")"
           git clone --depth=1 --branch=gh-pages --single-branch --no-checkout \
-            "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" tmp
+            "https://${GITHUB_ACTOR}:${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" tmp
           mv tmp/.git public/.git && rm -rf tmp/
           pushd public/ &>/dev/null
           git add -A
