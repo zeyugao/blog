@@ -19,6 +19,15 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Baloo Tammudu 2`,
+        ],
+        display: 'swap'
+      }
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'img',
@@ -49,6 +58,7 @@ module.exports = {
         ]
       }
     },
+    `gatsby-plugin-sass`,
     'gatsby-transformer-json',
     {
       resolve: 'gatsby-plugin-canonical-urls',

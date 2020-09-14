@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
 import Img, { GatsbyImageFixedProps } from 'gatsby-image'
 
+import '../styles/main.css'
+
 const IndexStyle = styled.div`
   position: absolute;
   top: 50%;
@@ -11,6 +13,7 @@ const IndexStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  font-family: "Baloo Tammudu 2", sans-serif;
 `
 
 const RoundedImg = styled(Img)`
@@ -34,8 +37,8 @@ const SelfDescription = (props: { data: ImageQueryProps }) => {
   const { data } = props
   return (
     <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
-      <div style={{ paddingBottom: 20, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
-      <div style={{ paddingBottom: 20, fontSize: 20 }}>
+      <div style={{ marginTop: 20, marginBottom: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
+      <div style={{ marginBottom: 10, fontSize: 20 }}>
         Undergraduate of Information Security in{' '}
         <a href="https://www.ustc.edu.cn" style={{ textDecoration: 'none' }}>
           USTC
@@ -43,10 +46,7 @@ const SelfDescription = (props: { data: ImageQueryProps }) => {
       </div>
       <div style={{ display: 'flex' }}>
         <a style={{ padding: 5 }} href="https://github.com/zeyugao">
-          <Img fixed={data.github.childImageSharp.fixed} />
-        </a>
-        <a style={{ padding: 5 }} href="mailto:charles.gaozeyu@gmail.com">
-          <Img fixed={data.gmail.childImageSharp.fixed} />
+          <Img fixed={data.github.childImageSharp.fixed}/>
         </a>
       </div>
     </div>
@@ -54,16 +54,23 @@ const SelfDescription = (props: { data: ImageQueryProps }) => {
 }
 
 const IndexPage = ({ data }: { data: ImageQueryProps }) => {
-  console.log(data)
   return (
     <IndexStyle>
       <RoundedImg
-        style={{ margin: 25, width: 150, height: 150, aspectRatio: 1 }}
+        style={{
+          marginTop: 'auto',
+          marginBottom: 'auto',
+          marginLeft: 25,
+          marginRight: 25,
+          width: 150,
+          height: 150,
+          aspectRatio: 1
+        }}
         fixed={data.head.childImageSharp.fixed}
         alt="头像"
         imgStyle={{ objectFit: 'contain' }}
       />
-      <SelfDescription data={data} />
+      <SelfDescription data={data}/>
     </IndexStyle>
   )
 }
