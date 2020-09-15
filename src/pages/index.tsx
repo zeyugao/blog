@@ -59,8 +59,8 @@ const IndexPage = ({ data }: { data: ImageQueryProps }) => {
           alt="头像"
           imgStyle={{ objectFit: 'contain' }}
         />
-        <div>
-          <div style={{ marginTop: 20, marginBottom: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
+        <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
+          <div style={{ marginTop: 10, marginBottom: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
           <div style={{ marginBottom: 10, fontSize: 20 }}>
             Undergraduate of Information Security in{' '}
             <a href="https://www.ustc.edu.cn" style={{ textDecoration: 'none' }}>
