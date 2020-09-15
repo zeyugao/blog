@@ -19,11 +19,16 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        fonts: [
-          `Baloo Tammudu 2`,
-        ],
+        fonts: {
+          google: [
+            {
+              family: 'Baloo Tammudu 2',
+              variants: ['400', '600']
+            }
+          ]
+        },
         display: 'swap'
       }
     },
