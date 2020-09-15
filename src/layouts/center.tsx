@@ -40,7 +40,7 @@ const CenterLayout: React.FC = ({ children }) => (
       }
     `}
     render={(data: StaticQueryProps) => (
-      <div>
+      <CenterStyle>
         <Helmet
           title={data.site.siteMetadata.title}
           meta={[
@@ -48,8 +48,8 @@ const CenterLayout: React.FC = ({ children }) => (
             { name: 'keywords', content: data.site.siteMetadata.keywords }
           ]}
         />
-        <CenterStyle>{children}</CenterStyle>
-      </div>
+        <div style={{ marginRight: 16, marginLeft: 16 }}>{children}</div>
+      </CenterStyle>
     )}
   />
 )
