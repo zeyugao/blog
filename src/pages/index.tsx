@@ -4,16 +4,7 @@ import { graphql } from 'gatsby'
 import Img, { GatsbyImageFixedProps } from 'gatsby-image'
 
 import '../styles/main.css'
-
-const IndexStyle = styled.div`
-  display: flex;
-
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: "Baloo Tammudu 2", sans-serif;
-`
+import CenterLayout from '../layouts/center'
 
 const Content = styled.div`
   @media (min-width: 960px){
@@ -44,7 +35,7 @@ interface ImageQueryProps {
 
 const IndexPage = ({ data }: { data: ImageQueryProps }) => {
   return (
-    <IndexStyle>
+    <CenterLayout>
       <Content>
         <RoundedImg
           style={{
@@ -74,7 +65,7 @@ const IndexPage = ({ data }: { data: ImageQueryProps }) => {
           </div>
         </div>
       </Content>
-    </IndexStyle>
+    </CenterLayout>
   )
 }
 

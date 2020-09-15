@@ -1,8 +1,18 @@
+import { graphql, StaticQuery } from 'gatsby'
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import styled from '@emotion/styled'
 
-import 'modern-normalize'
+
+const CenterStyle = styled.div`
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Baloo Tammudu 2", sans-serif;
+`
 
 interface StaticQueryProps {
   site: {
@@ -14,10 +24,10 @@ interface StaticQueryProps {
   }
 }
 
-const IndexLayout: React.FC = ({ children }) => (
+const CenterLayout: React.FC = ({ children }) => (
   <StaticQuery
     query={graphql`
-      query IndexLayoutQuery {
+      query CenterLayoutQuery {
         site {
           siteMetadata {
             title
@@ -35,10 +45,10 @@ const IndexLayout: React.FC = ({ children }) => (
             { name: 'keywords', content: data.site.siteMetadata.keywords }
           ]}
         />
-        <div>{children}</div>
+        <CenterStyle>{children}</CenterStyle>
       </div>
     )}
   />
 )
 
-export default IndexLayout
+export default CenterLayout
