@@ -6,11 +6,14 @@ import styled from '@emotion/styled'
 
 const CenterStyle = styled.div`
   display: flex;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 90vh;
+  //position: absolute;
+  //top: 50%;
+  //left: 50%;
+  //transform: translate(-50%,-50%);
   font-family: "Baloo Tammudu 2", sans-serif;
 `
 

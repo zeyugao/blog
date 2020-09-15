@@ -7,13 +7,12 @@ import '../styles/main.css'
 import CenterLayout from '../layouts/center'
 
 const Content = styled.div`
-  @media (min-width: 960px){
+  @media (min-width: 720px){
     display: flex;
     flex-direction: row;
   }
 
-  margin-left: 25px;
-  margin-right: 25px;
+  line-height: 1.5;
 `
 
 const RoundedImg = styled(Img)`
@@ -51,8 +50,8 @@ const IndexPage = ({ data }: { data: ImageQueryProps }) => {
           imgStyle={{ objectFit: 'contain' }}
         />
         <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
-          <div style={{ marginTop: 10, marginBottom: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
-          <div style={{ marginBottom: 10, fontSize: 20 }}>
+          <div style={{ marginTop: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
+          <div style={{ fontSize: 20 }}>
             Undergraduate of Information Security in{' '}
             <a href="https://www.ustc.edu.cn" style={{ textDecoration: 'none' }}>
               USTC
