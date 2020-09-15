@@ -6,14 +6,23 @@ import Img, { GatsbyImageFixedProps } from 'gatsby-image'
 import '../styles/main.css'
 
 const IndexStyle = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
-  flex-wrap: wrap;
+
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  min-height: 100vh;
   font-family: "Baloo Tammudu 2", sans-serif;
+`
+
+const Content = styled.div`
+  @media (min-width: 960px){
+    display: flex;
+    flex-direction: row;
+  }
+
+  margin-left: 25px;
+  margin-right: 25px;
 `
 
 const RoundedImg = styled(Img)`
@@ -33,44 +42,38 @@ interface ImageQueryProps {
   }
 }
 
-const SelfDescription = (props: { data: ImageQueryProps }) => {
-  const { data } = props
-  return (
-    <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
-      <div style={{ marginTop: 20, marginBottom: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
-      <div style={{ marginBottom: 10, fontSize: 20 }}>
-        Undergraduate of Information Security in{' '}
-        <a href="https://www.ustc.edu.cn" style={{ textDecoration: 'none' }}>
-          USTC
-        </a>
-      </div>
-      <div style={{ display: 'flex' }}>
-        <a style={{ padding: 5 }} href="https://github.com/zeyugao">
-          <Img fixed={data.github.childImageSharp.fixed}/>
-        </a>
-      </div>
-    </div>
-  )
-}
-
 const IndexPage = ({ data }: { data: ImageQueryProps }) => {
   return (
     <IndexStyle>
-      <RoundedImg
-        style={{
-          marginTop: 'auto',
-          marginBottom: 'auto',
-          marginLeft: 25,
-          marginRight: 25,
-          width: 150,
-          height: 150,
-          aspectRatio: 1
-        }}
-        fixed={data.head.childImageSharp.fixed}
-        alt="头像"
-        imgStyle={{ objectFit: 'contain' }}
-      />
-      <SelfDescription data={data}/>
+      <Content>
+        <RoundedImg
+          style={{
+            marginTop: 'auto',
+            marginBottom: 'auto',
+            marginRight: 25,
+            width: 150,
+            height: 150,
+            aspectRatio: 1
+          }}
+          fixed={data.head.childImageSharp.fixed}
+          alt="头像"
+          imgStyle={{ objectFit: 'contain' }}
+        />
+        <div>
+          <div style={{ marginTop: 20, marginBottom: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
+          <div style={{ marginBottom: 10, fontSize: 20 }}>
+            Undergraduate of Information Security in{' '}
+            <a href="https://www.ustc.edu.cn" style={{ textDecoration: 'none' }}>
+              USTC
+            </a>
+          </div>
+          <div style={{ display: 'flex' }}>
+            <a style={{ padding: 5 }} href="https://github.com/zeyugao">
+              <Img fixed={data.github.childImageSharp.fixed}/>
+            </a>
+          </div>
+        </div>
+      </Content>
     </IndexStyle>
   )
 }
