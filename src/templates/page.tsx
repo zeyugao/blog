@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 
-import CenterLayout from '../layouts/center'
-
 interface PageTemplateProps {
   data: {
     site: {
@@ -26,11 +24,11 @@ interface PageTemplateProps {
 }
 
 const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => (
-  <CenterLayout>
+  <div>
     <h1>{data.markdownRemark.frontmatter.title}</h1>
     {/* eslint-disable-next-line react/no-danger */}
-    <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}/>
-  </CenterLayout>
+    <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+  </div>
 )
 
 export default PageTemplate

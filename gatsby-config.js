@@ -36,7 +36,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'img',
-        path: `${__dirname}/src/static`
+        path: `${__dirname}/src/img`
       }
     },
     {
@@ -59,7 +59,8 @@ module.exports = {
               quality: 90,
               linkImagesToOriginal: false
             }
-          }
+          },
+          `gatsby-remark-admonitions`
         ]
       }
     },

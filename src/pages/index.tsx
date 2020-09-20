@@ -72,21 +72,21 @@ export default IndexPage
 
 export const query = graphql`
   query ImageQuery {
-    github: file(relativePath: { eq: "img/github-logo.png" }) {
+    github: file(relativePath: { eq: "github-logo.png" }) {
       childImageSharp {
         fixed(height: 24, width: 24) {
           ...GatsbyImageSharpFixed
         }
       }
     }
-    gmail: file(relativePath: { eq: "img/google-logo.png" }) {
+    gmail: file(relativePath: { eq: "google-logo.png" }) {
       childImageSharp {
         fixed(height: 24, width: 24) {
           ...GatsbyImageSharpFixed
         }
       }
     }
-    head: file(relativePath: { eq: "img/head.jpg" }) {
+    head: file(relativePath: { eq: "head.jpg" }) {
       childImageSharp {
         fixed(width: 300, height: 300) {
           ...GatsbyImageSharpFixed
