@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import styled from '@emotion/styled'
 
 interface PageTemplateProps {
   data: {
@@ -23,12 +24,20 @@ interface PageTemplateProps {
   }
 }
 
+const Layout = styled.div`
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+`
+
 const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => (
-  <div>
+  <Layout>
     <h1>{data.markdownRemark.frontmatter.title}</h1>
     {/* eslint-disable-next-line react/no-danger */}
     <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
-  </div>
+  </Layout>
 )
 
 export default PageTemplate

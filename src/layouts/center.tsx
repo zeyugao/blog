@@ -3,7 +3,6 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 
-
 const CenterStyle = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@ const CenterStyle = styled.div`
   //top: 50%;
   //left: 50%;
   //transform: translate(-50%,-50%);
-  font-family: "Baloo Tammudu 2", sans-serif;
+  font-family: 'Baloo Tammudu 2', sans-serif;
 `
 
 interface StaticQueryProps {

@@ -7,7 +7,7 @@ import '../styles/main.css'
 import CenterLayout from '../layouts/center'
 
 const Content = styled.div`
-  @media (min-width: 720px){
+  @media (min-width: 720px) {
     display: flex;
     flex-direction: row;
   }
@@ -59,7 +59,7 @@ const IndexPage = ({ data }: { data: ImageQueryProps }) => {
           </div>
           <div style={{ display: 'flex' }}>
             <a style={{ padding: 5 }} href="https://github.com/zeyugao">
-              <Img fixed={data.github.childImageSharp.fixed}/>
+              <Img fixed={data.github.childImageSharp.fixed} />
             </a>
           </div>
         </div>

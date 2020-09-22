@@ -103,6 +103,7 @@ sudo ~/imx_usb_loader/imx_usb u-boot-dtb.img
 串口配置：115200, 8N1, 无硬件、软件流控制
 
 **要将硬件流控制关掉，否则将无法输入，也无法跳过 autostart**
+:::
 
 :::important 避免 autostart
 并且，在 u-boot-dtb.img 加载之后，会立即启动，需要在串口中快速地按下任意键以避免 autostart。
