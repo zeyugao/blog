@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Img, { GatsbyImageFixedProps } from 'gatsby-image'
 
 import '../styles/main.css'
@@ -27,7 +27,7 @@ interface ImageQueryProps {
   github: {
     childImageSharp: GatsbyImageFixedProps
   }
-  gmail: {
+  blog: {
     childImageSharp: GatsbyImageFixedProps
   }
 }
@@ -58,9 +58,12 @@ const IndexPage = ({ data }: { data: ImageQueryProps }) => {
             </a>
           </div>
           <div style={{ display: 'flex' }}>
-            <a style={{ padding: 5 }} href="https://github.com/zeyugao">
+            <Link style={{ padding: 5 }} to="https://github.com/zeyugao">
               <Img fixed={data.github.childImageSharp.fixed} />
-            </a>
+            </Link>
+            <Link style={{ padding: 5 }} to="/list/">
+              <Img fixed={data.blog.childImageSharp.fixed} />
+            </Link>
           </div>
         </div>
       </Content>
@@ -79,16 +82,16 @@ export const query = graphql`
         }
       }
     }
-    gmail: file(relativePath: { eq: "google-logo.png" }) {
+    head: file(relativePath: { eq: "head.jpg" }) {
       childImageSharp {
-        fixed(height: 24, width: 24) {
+        fixed(width: 300, height: 300) {
           ...GatsbyImageSharpFixed
         }
       }
     }
-    head: file(relativePath: { eq: "head.jpg" }) {
+    blog: file(relativePath: { eq: "blog.png" }) {
       childImageSharp {
-        fixed(width: 300, height: 300) {
+        fixed(width: 24, height: 24) {
           ...GatsbyImageSharpFixed
         }
       }
