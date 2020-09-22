@@ -385,4 +385,66 @@ Ctrl+C to exit ...
 
 默认的账户与密码在下载 rootfs 中有提到
 
+## 启用另一个 CPU
 
+使用 `sudo lshw` 列出硬件信息，可以看出有一个 CPU 内核被禁用，这是由于使用安全模式加载了主线内核的原因
+
+可以在启动的时候在串口命令中输入
+
+```text
+=> env default -f -a
+=> setenv bootm_boot_mode nonsec
+=> saveenv
+```
+
+之后再 `reset` 重新启动，重新使用 `lshw`，可以看出 cpu1 也启用了
+
+```text
+*-core
+       description: Motherboard
+       physical id: 0
+     *-cpu:0
+          description: CPU
+          product: cpu
+          physical id: 0
+          bus info: cpu@0
+          size: 996MHz
+          capabilities: half thumb fastmult vfp edsp thumbee neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm
+     *-cpu:1
+          description: CPU
+          product: cpu
+          physical id: 1
+          bus info: cpu@1
+          size: 996MHz
+          capabilities: half thumb fastmult vfp edsp thumbee neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm
+     *-cpu:2 DISABLED
+          description: CPU
+          product: idle-states
+          physical id: 2
+          bus info: cpu@2
+     *-memory
+          description: System memory
+          physical id: 3
+          size: 422MiB
+```
+
+:::note PSCI
+理论上，可以通过启用 PSCI 来实现使用安全模式下仍然可以使用另一个 CPU
+:::
+
+## WLAN
+
+安装完后，仍然只能使用 LAN 联网，`ip a`下面无法出现 wlan0。
+
+通过 `dmesg` 可以检查到 brcmfmac 的驱动启动时缺少 `brcmfmac4339-sdio.txt` 和 `brcmfmac4339-sdio.technexion,imx7d-pico-pi.txt` 两个文件。
+
+在[网络](https://github.com/buildroot/buildroot/blob/master/board/technexion/imx6ulpico/rootfs_overlay/lib/firmware/brcm/brcmfmac4339-sdio.txt)上可以找到 `brcmfmac4339-sdio.txt` 文件，将其放进 `/lib/firmware/bcrm` 目录下，重启。
+
+使用 `ip a` 可以看到
+
+```text
+wlan0: <NO-CARRIER,BROADCAST,MULTICAST,DYNAMIC,UP> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+   link/ether b0:f1:ec:xx:xx:xx brd ff:ff:ff:ff:ff:ff
+```
+
+不过现在还不知道怎么把这个网卡 UP 起来
