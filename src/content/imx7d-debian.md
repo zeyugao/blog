@@ -438,7 +438,7 @@ Ctrl+C to exit ...
 
 通过 `dmesg` 可以检查到 brcmfmac 的驱动启动时缺少 `brcmfmac4339-sdio.txt` 和 `brcmfmac4339-sdio.technexion,imx7d-pico-pi.txt` 两个文件。
 
-在[网络](https://github.com/buildroot/buildroot/blob/master/board/technexion/imx6ulpico/rootfs_overlay/lib/firmware/brcm/brcmfmac4339-sdio.txt)上可以找到 `brcmfmac4339-sdio.txt` 文件，将其放进 `/lib/firmware/bcrm` 目录下，重启。
+在[网络](https://fossies.org/linux/buildroot/board/technexion/imx7dpico/rootfs_overlay/lib/firmware/brcm/brcmfmac4339-sdio.txt)上可以找到 `brcmfmac4339-sdio.txt` 文件，将其放进 `/lib/firmware/bcrm` 目录下，重启。
 
 使用 `ip a` 可以看到
 
