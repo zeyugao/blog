@@ -1,7 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
-import HomeButton from '../components/home-button'
 
 const Layout = styled.div`
   display: flex;
@@ -13,7 +12,7 @@ const Layout = styled.div`
 
 interface EdgeInterface {
   node: {
-    id: number;
+    id: number
     excerpt: string
     fields: {
       slug: string
@@ -49,9 +48,8 @@ const ListPage: React.FC<PageQueryInterface> = ({ data }) => {
   const Posts = data.allMarkdownRemark.edges.map(edge => <PostLink node={edge.node} key={edge.node.id} />)
   return (
     <Layout>
-      <h3>Post List</h3>
+      <h1>Post List</h1>
       <div>{Posts}</div>
-      <HomeButton />
     </Layout>
   )
 }
