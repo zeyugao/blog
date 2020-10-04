@@ -24,7 +24,7 @@ module.exports = {
         fonts: {
           google: [
             {
-              family: 'Baloo Tammudu 2',
+              family: 'Baloo 2',
               variants: ['400', '600']
             }
           ]

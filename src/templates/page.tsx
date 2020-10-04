@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import styled from '@emotion/styled'
+import NavBar from '../components/navbar'
 
 interface PageTemplateProps {
   data: {
@@ -33,11 +34,14 @@ const Layout = styled.div`
 `
 
 const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => (
-  <Layout>
-    <h1>{data.markdownRemark.frontmatter.title}</h1>
-    {/* eslint-disable-next-line react/no-danger */}
-    <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
-  </Layout>
+  <div>
+    <NavBar />
+    <Layout>
+      <h1>{data.markdownRemark.frontmatter.title}</h1>
+      {/* eslint-disable-next-line react/no-danger */}
+      <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+    </Layout>
+  </div>
 )
 
 export default PageTemplate

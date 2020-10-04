@@ -27,9 +27,6 @@ interface ImageQueryProps {
   github: {
     childImageSharp: GatsbyImageFixedProps
   }
-  blog: {
-    childImageSharp: GatsbyImageFixedProps
-  }
 }
 
 const IndexPage = ({ data }: { data: ImageQueryProps }) => {
@@ -51,18 +48,19 @@ const IndexPage = ({ data }: { data: ImageQueryProps }) => {
         />
         <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
           <div style={{ marginTop: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
-          <div style={{ fontSize: 20 }}>
+          <div style={{ fontSize: 20, marginTop: 5 }}>
             Undergraduate of Information Security in{' '}
             <a href="https://www.ustc.edu.cn" style={{ textDecoration: 'none' }}>
               USTC
             </a>
           </div>
           <div style={{ display: 'flex' }}>
-            <Link style={{ padding: 5 }} to="https://github.com/zeyugao">
+            <Link style={{ padding: 10 }} to="https://github.com/zeyugao">
               <Img fixed={data.github.childImageSharp.fixed} />
             </Link>
-            <Link style={{ padding: 5 }} to="/list/">
-              <Img fixed={data.blog.childImageSharp.fixed} />
+            <Link style={{ padding: 10 }} to="/list/">
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              View all posts=>
             </Link>
           </div>
         </div>
@@ -85,13 +83,6 @@ export const query = graphql`
     head: file(relativePath: { eq: "head.jpg" }) {
       childImageSharp {
         fixed(width: 300, height: 300) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-    blog: file(relativePath: { eq: "blog.png" }) {
-      childImageSharp {
-        fixed(width: 24, height: 24) {
           ...GatsbyImageSharpFixed
         }
       }

@@ -13,7 +13,7 @@ const CenterStyle = styled.div`
   //top: 50%;
   //left: 50%;
   //transform: translate(-50%,-50%);
-  font-family: 'Baloo Tammudu 2', sans-serif;
+  font-family: 'Baloo 2', sans-serif;
 `
 
 interface StaticQueryProps {
