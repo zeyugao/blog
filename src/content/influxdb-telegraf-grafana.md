@@ -2,6 +2,7 @@
 layout: page
 title: 'InfluxDB Telegraf Grafana 配置'
 slug: influxdb-telegraf-grafana
+date: 2020-11-7
 ---
 
 ## Installation

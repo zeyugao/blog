@@ -481,6 +481,7 @@ type MarkdownRemarkFields {
 }
 
 type MarkdownRemarkFrontmatter {
+  date: String
   layout: String
   slug: String
   title: String
@@ -731,9 +732,11 @@ type SitePluginPackageJsonPeerDependencies {
 }
 
 type SitePluginPluginOptions {
+  backgroundColor: String
   classPrefix: String
   display: String
   fonts: SitePluginPluginOptionsFonts
+  ignoreFileExtensions: [String]
   languageExtensions: [SitePluginPluginOptionsLanguageExtensions]
   linkImagesToOriginal: Boolean
   maxWidth: Int
@@ -742,12 +745,16 @@ type SitePluginPluginOptions {
   omitGoogleFont: Boolean
   path: String
   pathCheck: Boolean
+  pathPrefix: String
   pathToConfigModule: String
   plugins: [SitePluginPluginOptionsPlugins]
   prompt: SitePluginPluginOptionsPrompt
   quality: Int
+  showCaptions: Boolean
   showLineNumbers: Boolean
   siteUrl: String
+  tracedSVG: Boolean
+  withWebp: Boolean
   wrapperStyle: String
 }
 
@@ -776,14 +783,20 @@ type SitePluginPluginOptionsPlugins {
 }
 
 type SitePluginPluginOptionsPluginsPluginOptions {
+  backgroundColor: String
   classPrefix: String
+  ignoreFileExtensions: [String]
   languageExtensions: [SitePluginPluginOptionsPluginsPluginOptionsLanguageExtensions]
   linkImagesToOriginal: Boolean
   maxWidth: Int
   noInlineHighlight: Boolean
+  pathPrefix: String
   prompt: SitePluginPluginOptionsPluginsPluginOptionsPrompt
   quality: Int
+  showCaptions: Boolean
   showLineNumbers: Boolean
+  tracedSVG: Boolean
+  withWebp: Boolean
   wrapperStyle: String
 }
 
@@ -1063,6 +1076,7 @@ enum FileFieldsEnum {
   childMarkdownRemark___fields___layout @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___fields___slug @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___fileAbsolutePath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+  childMarkdownRemark___frontmatter___date
   childMarkdownRemark___frontmatter___layout
   childMarkdownRemark___frontmatter___slug
   childMarkdownRemark___frontmatter___title
@@ -1443,6 +1457,7 @@ enum MarkdownRemarkFieldsEnum {
   fields___layout @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
   fields___slug @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
   fileAbsolutePath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___date
   frontmatter___layout
   frontmatter___slug
   frontmatter___title
@@ -1861,9 +1876,11 @@ enum SitePageFieldsEnum {
   pluginCreator___parent___parent___children
   pluginCreator___parent___parent___id
   pluginCreator___pluginFilepath
+  pluginCreator___pluginOptions___backgroundColor
   pluginCreator___pluginOptions___classPrefix
   pluginCreator___pluginOptions___display
   pluginCreator___pluginOptions___fonts___google
+  pluginCreator___pluginOptions___ignoreFileExtensions
   pluginCreator___pluginOptions___languageExtensions
   pluginCreator___pluginOptions___languageExtensions___extend
   pluginCreator___pluginOptions___languageExtensions___language
@@ -1874,6 +1891,7 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___omitGoogleFont
   pluginCreator___pluginOptions___path
   pluginCreator___pluginOptions___pathCheck
+  pluginCreator___pluginOptions___pathPrefix
   pluginCreator___pluginOptions___pathToConfigModule
   pluginCreator___pluginOptions___plugins
   pluginCreator___pluginOptions___plugins___browserAPIs
@@ -1886,8 +1904,11 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___prompt___host
   pluginCreator___pluginOptions___prompt___user
   pluginCreator___pluginOptions___quality
+  pluginCreator___pluginOptions___showCaptions
   pluginCreator___pluginOptions___showLineNumbers
   pluginCreator___pluginOptions___siteUrl
+  pluginCreator___pluginOptions___tracedSVG
+  pluginCreator___pluginOptions___withWebp
   pluginCreator___pluginOptions___wrapperStyle
   pluginCreator___resolve
   pluginCreator___ssrAPIs
@@ -2001,11 +2022,13 @@ enum SitePluginFieldsEnum {
   parent___parent___parent___children
   parent___parent___parent___id
   pluginFilepath
+  pluginOptions___backgroundColor
   pluginOptions___classPrefix
   pluginOptions___display
   pluginOptions___fonts___google
   pluginOptions___fonts___google___family
   pluginOptions___fonts___google___variants
+  pluginOptions___ignoreFileExtensions
   pluginOptions___languageExtensions
   pluginOptions___languageExtensions___extend
   pluginOptions___languageExtensions___language
@@ -2016,19 +2039,26 @@ enum SitePluginFieldsEnum {
   pluginOptions___omitGoogleFont
   pluginOptions___path
   pluginOptions___pathCheck
+  pluginOptions___pathPrefix
   pluginOptions___pathToConfigModule
   pluginOptions___plugins
   pluginOptions___plugins___browserAPIs
   pluginOptions___plugins___id
   pluginOptions___plugins___name
   pluginOptions___plugins___pluginFilepath
+  pluginOptions___plugins___pluginOptions___backgroundColor
   pluginOptions___plugins___pluginOptions___classPrefix
+  pluginOptions___plugins___pluginOptions___ignoreFileExtensions
   pluginOptions___plugins___pluginOptions___languageExtensions
   pluginOptions___plugins___pluginOptions___linkImagesToOriginal
   pluginOptions___plugins___pluginOptions___maxWidth
   pluginOptions___plugins___pluginOptions___noInlineHighlight
+  pluginOptions___plugins___pluginOptions___pathPrefix
   pluginOptions___plugins___pluginOptions___quality
+  pluginOptions___plugins___pluginOptions___showCaptions
   pluginOptions___plugins___pluginOptions___showLineNumbers
+  pluginOptions___plugins___pluginOptions___tracedSVG
+  pluginOptions___plugins___pluginOptions___withWebp
   pluginOptions___plugins___pluginOptions___wrapperStyle
   pluginOptions___plugins___resolve
   pluginOptions___plugins___version
@@ -2036,8 +2066,11 @@ enum SitePluginFieldsEnum {
   pluginOptions___prompt___host
   pluginOptions___prompt___user
   pluginOptions___quality
+  pluginOptions___showCaptions
   pluginOptions___showLineNumbers
   pluginOptions___siteUrl
+  pluginOptions___tracedSVG
+  pluginOptions___withWebp
   pluginOptions___wrapperStyle
   resolve
   ssrAPIs
@@ -2332,6 +2365,7 @@ input MarkdownRemarkFilterInput {
 }
 
 input MarkdownRemarkFrontmatterFilterInput {
+  date: StringQueryOperatorInput
   layout: StringQueryOperatorInput
   slug: StringQueryOperatorInput
   title: StringQueryOperatorInput
@@ -2480,9 +2514,11 @@ input SitePluginPackageJsonPeerDependenciesFilterListInput {
 }
 
 input SitePluginPluginOptionsFilterInput {
+  backgroundColor: StringQueryOperatorInput
   classPrefix: StringQueryOperatorInput
   display: StringQueryOperatorInput
   fonts: SitePluginPluginOptionsFontsFilterInput
+  ignoreFileExtensions: StringQueryOperatorInput
   languageExtensions: SitePluginPluginOptionsLanguageExtensionsFilterListInput
   linkImagesToOriginal: BooleanQueryOperatorInput
   maxWidth: IntQueryOperatorInput
@@ -2491,12 +2527,16 @@ input SitePluginPluginOptionsFilterInput {
   omitGoogleFont: BooleanQueryOperatorInput
   path: StringQueryOperatorInput
   pathCheck: BooleanQueryOperatorInput
+  pathPrefix: StringQueryOperatorInput
   pathToConfigModule: StringQueryOperatorInput
   plugins: SitePluginPluginOptionsPluginsFilterListInput
   prompt: SitePluginPluginOptionsPromptFilterInput
   quality: IntQueryOperatorInput
+  showCaptions: BooleanQueryOperatorInput
   showLineNumbers: BooleanQueryOperatorInput
   siteUrl: StringQueryOperatorInput
+  tracedSVG: BooleanQueryOperatorInput
+  withWebp: BooleanQueryOperatorInput
   wrapperStyle: StringQueryOperatorInput
 }
 
@@ -2537,14 +2577,20 @@ input SitePluginPluginOptionsPluginsFilterListInput {
 }
 
 input SitePluginPluginOptionsPluginsPluginOptionsFilterInput {
+  backgroundColor: StringQueryOperatorInput
   classPrefix: StringQueryOperatorInput
+  ignoreFileExtensions: StringQueryOperatorInput
   languageExtensions: SitePluginPluginOptionsPluginsPluginOptionsLanguageExtensionsFilterListInput
   linkImagesToOriginal: BooleanQueryOperatorInput
   maxWidth: IntQueryOperatorInput
   noInlineHighlight: BooleanQueryOperatorInput
+  pathPrefix: StringQueryOperatorInput
   prompt: SitePluginPluginOptionsPluginsPluginOptionsPromptFilterInput
   quality: IntQueryOperatorInput
+  showCaptions: BooleanQueryOperatorInput
   showLineNumbers: BooleanQueryOperatorInput
+  tracedSVG: BooleanQueryOperatorInput
+  withWebp: BooleanQueryOperatorInput
   wrapperStyle: StringQueryOperatorInput
 }
 

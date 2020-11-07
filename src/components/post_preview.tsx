@@ -21,6 +21,7 @@ const RoundedCard = styled.div`
   background-color: whitesmoke;
 
   padding: 20px;
+  margin: 20px;
 `
 
 const PostPreview: React.FC<EdgeInterface> = ({ node }) => {

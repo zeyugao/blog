@@ -1,7 +1,8 @@
 ---
 layout: page
-title: 'Let's Encrypt 配置'
-slug: 'letsencrypt configure'
+title: Let's Encrypt 配置
+slug: letsencrypt
+date: 2020-11-7
 ---
 
 ## Installation
