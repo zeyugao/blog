@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 'Let's Encrypt 配置'
-slug: letsencrypt configure
+slug: 'letsencrypt configure'
 ---
 
 ## Installation
