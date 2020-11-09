@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
 import NavBar from '../components/navbar'
-import PostPreview from '../components/post_preview'
+import PostPreview from '../components/post-preview'
 
 const Layout = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ export default ListPage
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
           id
