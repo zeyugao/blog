@@ -2,6 +2,7 @@ import * as React from 'react'
 import { graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import NavBar from '../components/navbar'
+import Footer from '../components/footer'
 
 interface PageTemplateProps {
   data: {
@@ -40,6 +41,7 @@ const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => (
       <h1>{data.markdownRemark.frontmatter.title}</h1>
       {/* eslint-disable-next-line react/no-danger */}
       <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+      <Footer />
     </Layout>
   </div>
 )

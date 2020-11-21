@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
 import NavBar from '../components/navbar'
 import PostPreview from '../components/post-preview'
+import Footer from '../components/footer'
 
 const Layout = styled.div`
   display: flex;
@@ -44,6 +45,7 @@ const ListPage: React.FC<PageQueryInterface> = ({ data }) => {
       <NavBar showBlog={false} />
       <Layout>
         <div>{Posts}</div>
+        <Footer />
       </Layout>
     </div>
   )
