@@ -39,7 +39,7 @@ mkdir -p .well-known/acme-challenge
 
 `--email` 为申请者邮箱，`--webroot` 为 webroot 方式，`-w` 为站点目录，`-d` 为要加 https 的域名
 
-```
+```shell
 certbot certonly --email root@example.com \
     --webroot -w /var/www/html/example.com \
     -d example.com \
