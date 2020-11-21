@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import { Link } from 'gatsby'
+import AnimatedLink from './animated-link'
 
 const StyledNav = styled.div`
   display: flex;
@@ -13,20 +13,40 @@ const StyledNav = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  margin-bottom: 35px;
+  margin-bottom: 15px;
 `
 
-const NavBar: React.FC = () => {
+const FlexDiv = styled.div`
+  display: flex;
+`
+
+interface NavBarInterface {
+  showBlog?: boolean
+  showAbout?: boolean
+}
+
+const NavBar: React.FC<NavBarInterface> = ({ showBlog = true, showAbout = false }) => {
+  const BlogLink = (
+    <AnimatedLink to="/list/">
+      <span style={{ fontSize: '1.2rem' }}>Blog</span>
+    </AnimatedLink>
+  )
+
+  const AboutLink = (
+    <div>
+      <AnimatedLink to="/list/"> About </AnimatedLink>
+    </div>
+  )
+
   return (
     <StyledNav>
-      <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-        <h1 style={{ borderBottom: 'none', fontSize: '2rem', margin: 0 }}>Home</h1>
-      </Link>
-      <div>
-        <Link to="/list/" style={{ color: 'black', textDecoration: 'none' }}>
-          All Posts
-        </Link>
-      </div>
+      <FlexDiv>
+        <AnimatedLink to="/" style={{ marginRight: '10px' }}>
+          <span style={{ fontSize: '1.2rem' }}>Home</span>
+        </AnimatedLink>
+        {showBlog ? BlogLink : <></>}
+      </FlexDiv>
+      {showAbout ? AboutLink : <></>}
     </StyledNav>
   )
 }

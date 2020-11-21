@@ -41,7 +41,7 @@ const ListPage: React.FC<PageQueryInterface> = ({ data }) => {
   const Posts = data.allMarkdownRemark.edges.map(edge => <PostPreview node={edge.node} key={edge.node.id} />)
   return (
     <div>
-      <NavBar />
+      <NavBar showBlog={false} />
       <Layout>
         <div>{Posts}</div>
       </Layout>
