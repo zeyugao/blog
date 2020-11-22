@@ -10,6 +10,8 @@ const AnimatedLink = styled(Link)`
 
   font-size: 1.25rem;
 
+  font-family: 'Baloo 2', sans-serif;
+
   ::after {
     content: '';
     position: absolute;

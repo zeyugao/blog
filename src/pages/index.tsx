@@ -58,6 +58,7 @@ const IndexPage = ({ data }: { data: ImageQueryProps }) => {
           <div style={{ display: 'flex', marginTop: 10 }}>
             <AnimatedLink to="https://github.com/zeyugao">GitHub</AnimatedLink>
             <AnimatedLink to="/list/">Blog</AnimatedLink>
+            <AnimatedLink to="https://apps.elsagranger.com">Apps</AnimatedLink>
           </div>
         </div>
       </Content>
