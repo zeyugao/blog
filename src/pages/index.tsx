@@ -1,79 +1,71 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
-import Img, { GatsbyImageFixedProps } from 'gatsby-image'
+import NavBar from '../components/navbar'
+import PostPreview from '../components/post-preview'
+import Footer from '../components/footer'
 
 import '../styles/main.css'
-import CenterLayout from '../layouts/center'
-import AnimatedLink from '../components/animated-link'
 
-const Content = styled.div`
-  @media (min-width: 720px) {
-    display: flex;
-    flex-direction: row;
-  }
-
-  line-height: 1.5;
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Baloo Tammudu 2', sans-serif;
 `
 
-const RoundedImg = styled(Img)`
-  grid: 1/-1;
-  border-radius: 50%;
-`
-
-interface ImageQueryProps {
-  head: {
-    childImageSharp: GatsbyImageFixedProps
-  }
-  github: {
-    childImageSharp: GatsbyImageFixedProps
+interface EdgeInterface {
+  node: {
+    id: number
+    excerpt: string
+    frontmatter: {
+      date: string
+      title: string
+      slug: string
+    }
   }
 }
 
-const IndexPage = ({ data }: { data: ImageQueryProps }) => {
+interface PageQueryInterface {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+    allMarkdownRemark: {
+      edges: EdgeInterface[]
+    }
+  }
+}
+
+const ListPage: React.FC<PageQueryInterface> = ({ data }) => {
+  const Posts = data.allMarkdownRemark.edges.map(edge => <PostPreview node={edge.node} key={edge.node.id} />)
   return (
-    <CenterLayout>
-      <Content>
-        <RoundedImg
-          style={{
-            marginTop: 'auto',
-            marginBottom: 'auto',
-            marginRight: 25,
-            width: 150,
-            height: 150,
-            aspectRatio: 1
-          }}
-          fixed={data.head.childImageSharp.fixed}
-          alt="头像"
-          imgStyle={{ objectFit: 'contain' }}
-        />
-        <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
-          <div style={{ marginTop: 10, fontSize: '2rem', fontWeight: 600 }}>Elsa Granger</div>
-          <div style={{ fontSize: 20, marginTop: 5 }}>
-            Undergraduate of Information Security in{' '}
-            <a href="https://www.ustc.edu.cn" style={{ textDecoration: 'none' }}>
-              USTC
-            </a>
-          </div>
-          <div style={{ display: 'flex', marginTop: 10 }}>
-            <AnimatedLink to="https://github.com/zeyugao">GitHub</AnimatedLink>
-            <AnimatedLink to="/list/">Blog</AnimatedLink>
-            <AnimatedLink to="https://apps.elsagranger.com">Apps</AnimatedLink>
-          </div>
-        </div>
-      </Content>
-    </CenterLayout>
+    <div>
+      <NavBar showBlog={false} />
+      <Layout>
+        <div>{Posts}</div>
+        <Footer />
+      </Layout>
+    </div>
   )
 }
 
-export default IndexPage
+export default ListPage
 
-export const query = graphql`
-  query ImageQuery {
-    head: file(relativePath: { eq: "head.jpg" }) {
-      childImageSharp {
-        fixed(width: 300, height: 300) {
-          ...GatsbyImageSharpFixed
+export const pageQuery = graphql`
+  query {
+    allMarkdownRemark(sort: { order: ASC, fields: [frontmatter___date] }) {
+      edges {
+        node {
+          id
+          excerpt(pruneLength: 150)
+          frontmatter {
+            slug
+            title
+          }
         }
       }
     }

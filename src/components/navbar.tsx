@@ -27,14 +27,14 @@ interface NavBarInterface {
 
 const NavBar: React.FC<NavBarInterface> = ({ showBlog = true, showAbout = false }) => {
   const BlogLink = (
-    <AnimatedLink to="/list/">
+    <AnimatedLink to="/">
       <span style={{ fontSize: '1.5rem' }}>Blog</span>
     </AnimatedLink>
   )
 
   const AboutLink = (
     <div>
-      <AnimatedLink to="/list/">
+      <AnimatedLink to="/about/">
         <span style={{ fontSize: '1.5rem' }}>About</span>
       </AnimatedLink>
     </div>
@@ -43,7 +43,7 @@ const NavBar: React.FC<NavBarInterface> = ({ showBlog = true, showAbout = false 
   return (
     <StyledNav>
       <FlexDiv>
-        <AnimatedLink to="/" style={{ marginRight: '10px' }}>
+        <AnimatedLink to="https://elsagranger.com" style={{ marginRight: '10px' }}>
           <span style={{ fontSize: '1.5rem' }}>Home</span>
         </AnimatedLink>
         {showBlog ? BlogLink : <></>}
