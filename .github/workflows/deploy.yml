@@ -30,7 +30,7 @@ jobs:
             "https://${GITHUB_ACTOR}:${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" tmp
           mv tmp/.git public/.git && rm -rf tmp/
           pushd public/ &>/dev/null
-          echo elsagranger.com > CNAME
+          echo blog.elsagranger.com > CNAME
           git add -A
           git -c user.name=GitHub -c user.email=noreply@github.com commit \
             -m "Auto deploy from GitHub Actions build ${GITHUB_RUN_NUMBER}" \
