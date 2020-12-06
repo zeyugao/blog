@@ -18,7 +18,6 @@ const RoundedCard = styled.div`
   border-radius: 16px;
   max-width: 750px;
   width: 90vw;
-  background-color: whitesmoke;
 
   padding: 20px;
   margin: 20px;
