@@ -13,7 +13,7 @@ const StyledNav = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 `
 
 const FlexDiv = styled.div`
@@ -23,13 +23,22 @@ const FlexDiv = styled.div`
 interface NavBarInterface {
   showBlog?: boolean
   showAbout?: boolean
+  showFriends?: boolean
 }
 
-const NavBar: React.FC<NavBarInterface> = ({ showBlog = true, showAbout = false }) => {
+const NavBar: React.FC<NavBarInterface> = ({ showBlog = true, showAbout = false, showFriends = false }) => {
   const BlogLink = (
     <AnimatedLink to="/">
       <span style={{ fontSize: '1.5rem' }}>Blog</span>
     </AnimatedLink>
+  )
+
+  const FriendPage = (
+    <div>
+      <AnimatedLink to="/friends/">
+        <span style={{ fontSize: '1.5rem' }}>Friends</span>
+      </AnimatedLink>
+    </div>
   )
 
   const AboutLink = (
@@ -43,11 +52,12 @@ const NavBar: React.FC<NavBarInterface> = ({ showBlog = true, showAbout = false 
   return (
     <StyledNav>
       <FlexDiv>
-        <AnimatedLink to="https://elsagranger.com" style={{ marginRight: '10px' }}>
+        <AnimatedLink to="https://elsagranger.com" style={{ marginRight: '16px' }}>
           <span style={{ fontSize: '1.5rem' }}>Home</span>
         </AnimatedLink>
         {showBlog ? BlogLink : <></>}
       </FlexDiv>
+      {showFriends ? FriendPage : <></>}
       {showAbout ? AboutLink : <></>}
     </StyledNav>
   )
