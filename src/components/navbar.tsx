@@ -9,11 +9,12 @@ const StyledNav = styled.div`
   max-width: 800px;
 
   margin-top: 20px;
-
   margin-left: auto;
   margin-right: auto;
-
   margin-bottom: 30px;
+
+  padding-right: 20px;
+  padding-left: 20px;
 `
 
 const FlexDiv = styled.div`

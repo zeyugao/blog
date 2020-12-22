@@ -36,8 +36,8 @@ const Layout = styled.div`
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
 `
 
 const PersonInfo: React.FC<FriendsInterface> = detail => {
