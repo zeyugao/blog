@@ -41,11 +41,19 @@ interface PageQueryInterface {
 }
 
 const ListPage: React.FC<PageQueryInterface> = ({ data }) => {
-  const Posts = data.allMarkdownRemark.edges.map(edge => <PostPreview node={edge.node} key={edge.node.id} />)
+  const { length } = data.allMarkdownRemark.edges
+  const Posts = data.allMarkdownRemark.edges.map((edge, index) => (
+      <>
+        <PostPreview node={edge.node} key={edge.node.id} />
+        {index < length - 1 ? <hr style={{ marginRight: '16px', marginLeft: '16px' }} /> : <></>}
+      </>
+    )
+  )
   return (
     <div>
       <NavBar showBlog={false} showFriends />
       <Layout>
+        <h1 style={{ justifyContent: 'left' }}>Post List</h1>
         <div>{Posts}</div>
         <Footer />
       </Layout>
