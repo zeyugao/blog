@@ -3,7 +3,7 @@ module.exports = {
     title: 'Elsa Granger',
     description: 'Elsa Granger Personal Page',
     keywords: '',
-    siteUrl: 'https://elsagranger.me',
+    siteUrl: 'https://blog.elsagranger.com',
     author: {
       name: '',
       url: '',
@@ -11,6 +11,7 @@ module.exports = {
     }
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
     {
       resolve: 'gatsby-source-filesystem',
       options: {
