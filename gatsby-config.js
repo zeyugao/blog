@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-feed`,
     {
       resolve: 'gatsby-source-filesystem',
       options: {
