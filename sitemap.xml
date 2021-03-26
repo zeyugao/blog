@@ -4,6 +4,7 @@
 <url> <loc>https://blog.elsagranger.com/influxdb-telegraf-grafana/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/letsencrypt/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/time-machine-on-linux/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.elsagranger.com/wireguard/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/friends/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
