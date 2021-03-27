@@ -1,4 +1,135 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Elsa Granger]]></title><description><![CDATA[Elsa Granger Personal Page]]></description><link>https://blog.elsagranger.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 Mar 2021 13:08:55 GMT</lastBuildDate><item><title><![CDATA[WireGuard 配置]]></title><description><![CDATA[Installation 比较新的内核都已经将 WireGuard 打包进了内核，直接安装管理工具即可 查看是否安装完成 在  后追加  使得能够自动载入内核模块 Config 生成公私钥 Peer 1 这个作为接受外来连接的对等端 编辑 ，添加 Peer 2 Route…]]></description><link>https://blog.elsagranger.com/wireguard/</link><guid isPermaLink="false">https://blog.elsagranger.com/wireguard/</guid><pubDate>Fri, 26 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Installation&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Elsa Granger]]></title><description><![CDATA[Elsa Granger Personal Page]]></description><link>https://blog.elsagranger.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 27 Mar 2021 06:52:10 GMT</lastBuildDate><item><title><![CDATA[OpenVPN to Shadowsocks]]></title><description><![CDATA[OpenVPN 转 SOCKS 安装 使用 docker-openvpn-client-socks 可以直接  启动，或者修改  其中，去掉了要求 tty 的参数，便于添加为 systemd 服务 使用 docker build 镜像 之后就可以使用 curl…]]></description><link>https://blog.elsagranger.com/openvpn-socks-shadowsocks/</link><guid isPermaLink="false">https://blog.elsagranger.com/openvpn-socks-shadowsocks/</guid><pubDate>Sat, 27 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;OpenVPN 转 SOCKS&lt;/h2&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;p&gt;使用 &lt;a href=&quot;https://github.com/kizzx2/docker-openvpn-client-socks&quot;&gt;docker-openvpn-client-socks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可以直接 &lt;code class=&quot;language-text&quot;&gt;./start PATH-TO-OVPN-CONF&lt;/code&gt; 启动，或者修改 &lt;code class=&quot;language-text&quot;&gt;start&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token shebang important&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;token builtin class-name&quot;&gt;exec&lt;/span&gt; docker run &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --rm &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --device&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;/dev/net/tun &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --name&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;openvpn-client &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --cap-add&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;NET_ADMIN &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --publish &lt;span class=&quot;token number&quot;&gt;127.0&lt;/span&gt;.0.1:1080:1080 &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --volume &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;realpath &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$1&lt;/span&gt;&quot;&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;:/etc/openvpn/:ro&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --sysctl net.ipv6.conf.all.disable_ipv6&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    openvpn-client-socks&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中，去掉了要求 tty 的参数，便于添加为 systemd 服务&lt;/p&gt;
+&lt;p&gt;使用 docker build 镜像&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;docker build &lt;span class=&quot;token builtin class-name&quot;&gt;.&lt;/span&gt; -t openvpn-client-socks&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;之后就可以使用 curl 进行测试&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;http_proxy&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;socks://localhost:9050&quot;&lt;/span&gt;
+&lt;span class=&quot;token builtin class-name&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;https_proxy&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$http_proxy&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;curl&lt;/span&gt; https://github.com -vvvv --head&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;备注&lt;/h3&gt;
+&lt;p&gt;最好在一个新的文件夹下面放置 OpenVPN 的文件，并且后缀名是 conf 而不是 ovpn&lt;/p&gt;
+&lt;p&gt;在 OpenVPN 的配置文件中的 &lt;code class=&quot;language-text&quot;&gt;dev&lt;/code&gt; 选项中，要将 tun 设备名设置为 &lt;code class=&quot;language-text&quot;&gt;tun0&lt;/code&gt;，与 &lt;code class=&quot;language-text&quot;&gt;sockd.conf&lt;/code&gt; 中的 &lt;code class=&quot;language-text&quot;&gt;external&lt;/code&gt; 相匹配&lt;/p&gt;
+&lt;h2&gt;SOCKS to Shadowsocks&lt;/h2&gt;
+&lt;p&gt;由于使用的是 v2ray，可以转成任意的协议&lt;/p&gt;
+&lt;p&gt;配置参考&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;{
+  &amp;quot;inbounds&amp;quot;: [
+    {
+      &amp;quot;port&amp;quot;: 16823,
+      &amp;quot;protocol&amp;quot;: &amp;quot;shadowsocks&amp;quot;,
+      &amp;quot;settings&amp;quot;: {
+        &amp;quot;method&amp;quot;: &amp;quot;aes-128-gcm&amp;quot;,
+        &amp;quot;password&amp;quot;: &amp;quot;password&amp;quot;,
+        &amp;quot;level&amp;quot;: 0,
+        &amp;quot;ota&amp;quot;: false,
+        &amp;quot;network&amp;quot;: &amp;quot;tcp&amp;quot;
+      }
+    }
+  ],
+  &amp;quot;outbounds&amp;quot;: [
+    {
+      &amp;quot;protocol&amp;quot;: &amp;quot;socks&amp;quot;,
+      &amp;quot;settings&amp;quot;: {
+        &amp;quot;servers&amp;quot;: [
+          {
+            &amp;quot;address&amp;quot;: &amp;quot;127.0.0.1&amp;quot;,
+            &amp;quot;port&amp;quot;: 9050
+          }
+        ]
+      }
+    }
+  ]
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;后记&lt;/h2&gt;
+&lt;p&gt;性能要求有点高&lt;/p&gt;
+&lt;h3&gt;Pi 3b&lt;/h3&gt;
+&lt;p&gt;使用树莓派 3B 跑这一套流程，v2ray 会有极高的延迟，但是直连 SOCKS 就没有问题。速度比较慢，很容易跑满树莓派的 CPU&lt;/p&gt;
+&lt;p&gt;vless -&gt; socks -&gt; openvpn&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1140px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 32.98245614035088%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAHABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAIF/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAB3AWD/8QAFxABAAMAAAAAAAAAAAAAAAAAEQABIf/aAAgBAQABBQIsNn//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAUEAEAAAAAAAAAAAAAAAAAAAAQ/9oACAEBAAY/An//xAAYEAEAAwEAAAAAAAAAAAAAAAABABAhEf/aAAgBAQABPyFTSQWjlf/aAAwDAQACAAMAAAAQg8//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAaEAACAgMAAAAAAAAAAAAAAAAAEQExIUFR/9oACAEBAAE/EFJht8IlJWyGs2f/2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;vless -&amp;gt; socks -&amp;gt; openvpn, pi&quot;
+        title=&quot;vless -&amp;gt; socks -&amp;gt; openvpn, pi&quot;
+        src=&quot;/static/85dca371e0fbd916094dd4992d54f887/65ac4/vless-socks-openvpn-pi.jpg&quot;
+        srcset=&quot;/static/85dca371e0fbd916094dd4992d54f887/65031/vless-socks-openvpn-pi.jpg 285w,
+/static/85dca371e0fbd916094dd4992d54f887/fd252/vless-socks-openvpn-pi.jpg 570w,
+/static/85dca371e0fbd916094dd4992d54f887/65ac4/vless-socks-openvpn-pi.jpg 1140w,
+/static/85dca371e0fbd916094dd4992d54f887/38ece/vless-socks-openvpn-pi.jpg 1280w&quot;
+        sizes=&quot;(max-width: 1140px) 100vw, 1140px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;socks -&gt; openvpn&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1140px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 44.21052631578947%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAJABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUD/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAID/9oADAMBAAIQAxAAAAG4nYs7DAv/xAAaEAABBQEAAAAAAAAAAAAAAAADAAEQMjNB/9oACAEBAAEFAuwbRkCn/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAECIf/aAAgBAwEBPwF2LT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAVEAEBAAAAAAAAAAAAAAAAAAAQAf/aAAgBAQAGPwJr/8QAGxABAAEFAQAAAAAAAAAAAAAAALEBESExUWH/2gAIAQEAAT8h7Zv4ojNkr//aAAwDAQACAAMAAAAQ6w//xAAWEQEBAQAAAAAAAAAAAAAAAAABEQD/2gAIAQMBAT8QipMou//EABURAQEAAAAAAAAAAAAAAAAAABAR/9oACAECAQE/EIf/xAAdEAACAgEFAAAAAAAAAAAAAAAAARExsSFhceHw/9oACAEBAAE/EGsV0J0NNKc9Ektcnq2Kizmf/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;socks -&amp;gt; openvpn, pi&quot;
+        title=&quot;socks -&amp;gt; openvpn, pi&quot;
+        src=&quot;/static/915fa7850622b9c17fb40f02e077c648/65ac4/socks-openvpn-pi.jpg&quot;
+        srcset=&quot;/static/915fa7850622b9c17fb40f02e077c648/65031/socks-openvpn-pi.jpg 285w,
+/static/915fa7850622b9c17fb40f02e077c648/fd252/socks-openvpn-pi.jpg 570w,
+/static/915fa7850622b9c17fb40f02e077c648/65ac4/socks-openvpn-pi.jpg 1140w,
+/static/915fa7850622b9c17fb40f02e077c648/38ece/socks-openvpn-pi.jpg 1280w&quot;
+        sizes=&quot;(max-width: 1140px) 100vw, 1140px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;x86&lt;/h3&gt;
+&lt;p&gt;在一台 i5-4590 机器上跑&lt;/p&gt;
+&lt;p&gt;shadowsocks -&gt; socks -&gt; openvpn&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1140px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 52.63157894736842%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhADEAAAAe4sFZ1Ehf/EABkQAAIDAQAAAAAAAAAAAAAAAAARAQIhEP/aAAgBAQABBQLmkt6VP//EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oACAEDAQE/Aar/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAZEAACAwEAAAAAAAAAAAAAAAAAMQEQkUH/2gAIAQEABj8CEdHOjna//8QAHRAAAgEEAwAAAAAAAAAAAAAAAREAITFRYXHB0f/aAAgBAQABPyGrNXqIPwJyg2ZIBbsQirm+Z//aAAwDAQACAAMAAAAQ29//xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAIAQMBAT8QZp//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAfEAEAAwAABwEAAAAAAAAAAAABABEhMUFRYYGh0fD/2gAIAQEAAT8QRMoOZKqCArR5PcSyoX0CCpPfBfZiZ/jnFu37kz//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;shadowsocks -&amp;gt; socks -&amp;gt; openvpn, i5-4590&quot;
+        title=&quot;shadowsocks -&amp;gt; socks -&amp;gt; openvpn, i5-4590&quot;
+        src=&quot;/static/0604741476138a834e7c032e896002c9/65ac4/shadowsocks-socks-openvpn-x86.jpg&quot;
+        srcset=&quot;/static/0604741476138a834e7c032e896002c9/65031/shadowsocks-socks-openvpn-x86.jpg 285w,
+/static/0604741476138a834e7c032e896002c9/fd252/shadowsocks-socks-openvpn-x86.jpg 570w,
+/static/0604741476138a834e7c032e896002c9/65ac4/shadowsocks-socks-openvpn-x86.jpg 1140w,
+/static/0604741476138a834e7c032e896002c9/38ece/shadowsocks-socks-openvpn-x86.jpg 1280w&quot;
+        sizes=&quot;(max-width: 1140px) 100vw, 1140px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;可能需要优化，但是本身 &lt;code class=&quot;language-text&quot;&gt;openvpn&lt;/code&gt; 服务以及 &lt;code class=&quot;language-text&quot;&gt;sockd&lt;/code&gt; 服务占用的资源就已经比较多了&lt;/p&gt;</content:encoded></item><item><title><![CDATA[WireGuard 配置]]></title><description><![CDATA[Installation 比较新的内核都已经将 WireGuard 打包进了内核，直接安装管理工具即可 查看是否安装完成 在  后追加  使得能够自动载入内核模块 Config 生成公私钥 Peer 1 这个作为接受外来连接的对等端 编辑 ，添加 Peer 2 Route…]]></description><link>https://blog.elsagranger.com/wireguard/</link><guid isPermaLink="false">https://blog.elsagranger.com/wireguard/</guid><pubDate>Fri, 26 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Installation&lt;/h2&gt;
 &lt;p&gt;比较新的内核都已经将 WireGuard 打包进了内核，直接安装管理工具即可&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; wireguard&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;查看是否安装完成&lt;/p&gt;

@@ -3,6 +3,7 @@
 <url> <loc>https://blog.elsagranger.com/imx7d-debian/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/influxdb-telegraf-grafana/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/letsencrypt/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.elsagranger.com/openvpn-socks-shadowsocks/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/time-machine-on-linux/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/wireguard/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.elsagranger.com/friends/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
