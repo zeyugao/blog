@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 'OpenVPN to Shadowsocks'
-slug: openvpn2ss
+slug: openvpn-socks-shadowsocks
 date: 2021-03-27
 ---
 
