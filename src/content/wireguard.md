@@ -2,7 +2,7 @@
 layout: page
 title: 'WireGuard 配置'
 slug: wireguard
-date: 2021-3-26
+date: 2021-03-26
 ---
 
 ## Installation

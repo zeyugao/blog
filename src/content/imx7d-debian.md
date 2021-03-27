@@ -2,7 +2,7 @@
 layout: page
 title: '在 Android Things 上安装 Debian'
 slug: imx7d-debian
-date: 2020-9-20
+date: 2020-09-20
 ---
 
 Android Things 有两个官方支持的版本，一个是 `NXP i.MX7D`，另一个是 `Raspberry Pi`。后者没有什么可说的，主要是前者应该当如何安装。

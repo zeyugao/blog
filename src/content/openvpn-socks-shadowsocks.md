@@ -2,7 +2,7 @@
 layout: page
 title: 'OpenVPN to Shadowsocks'
 slug: openvpn2ss
-date: 2021-3-27
+date: 2021-03-27
 ---
 
 ## OpenVPN 转 SOCKS
