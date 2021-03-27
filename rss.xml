@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Elsa Granger]]></title><description><![CDATA[Elsa Granger Personal Page]]></description><link>https://blog.elsagranger.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 27 Mar 2021 06:52:10 GMT</lastBuildDate><item><title><![CDATA[OpenVPN to Shadowsocks]]></title><description><![CDATA[OpenVPN 转 SOCKS 安装 使用 docker-openvpn-client-socks 可以直接  启动，或者修改  其中，去掉了要求 tty 的参数，便于添加为 systemd 服务 使用 docker build 镜像 之后就可以使用 curl…]]></description><link>https://blog.elsagranger.com/openvpn-socks-shadowsocks/</link><guid isPermaLink="false">https://blog.elsagranger.com/openvpn-socks-shadowsocks/</guid><pubDate>Sat, 27 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;OpenVPN 转 SOCKS&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Elsa Granger]]></title><description><![CDATA[Elsa Granger Personal Page]]></description><link>https://blog.elsagranger.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 27 Mar 2021 06:59:02 GMT</lastBuildDate><item><title><![CDATA[OpenVPN to Shadowsocks]]></title><description><![CDATA[OpenVPN 转 SOCKS 安装 使用 docker-openvpn-client-socks 可以直接  启动，或者修改  其中，去掉了要求 tty 的参数，便于添加为 systemd 服务 使用 docker build 镜像 之后就可以使用 curl…]]></description><link>https://blog.elsagranger.com/openvpn-socks-shadowsocks/</link><guid isPermaLink="false">https://blog.elsagranger.com/openvpn-socks-shadowsocks/</guid><pubDate>Sat, 27 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;OpenVPN 转 SOCKS&lt;/h2&gt;
 &lt;h3&gt;安装&lt;/h3&gt;
 &lt;p&gt;使用 &lt;a href=&quot;https://github.com/kizzx2/docker-openvpn-client-socks&quot;&gt;docker-openvpn-client-socks&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;可以直接 &lt;code class=&quot;language-text&quot;&gt;./start PATH-TO-OVPN-CONF&lt;/code&gt; 启动，或者修改 &lt;code class=&quot;language-text&quot;&gt;start&lt;/code&gt;&lt;/p&gt;
@@ -196,7 +196,168 @@ Address = 10.3.1.2/24
 PublicKey = Public Key 1
 AllowedIPs = 10.3.1.0/24
 Endpoint = ip:port
-PersistentKeepalive = 15&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[在 Android Things 上安装 Debian]]></title><description><![CDATA[Android Things 有两个官方支持的版本，一个是 ，另一个是 。后者没有什么可说的，主要是前者应该当如何安装。 主要参考了这个文章 Toolchain 我们需要的有：，， imx_usb_loader ARM Cross Compiler: GCC…]]></description><link>https://blog.elsagranger.com/imx7d-debian/</link><guid isPermaLink="false">https://blog.elsagranger.com/imx7d-debian/</guid><pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Android Things 有两个官方支持的版本，一个是 &lt;code class=&quot;language-text&quot;&gt;NXP i.MX7D&lt;/code&gt;，另一个是 &lt;code class=&quot;language-text&quot;&gt;Raspberry Pi&lt;/code&gt;。后者没有什么可说的，主要是前者应该当如何安装。&lt;/p&gt;
+PersistentKeepalive = 15&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[InfluxDB Telegraf Grafana 配置]]></title><description><![CDATA[Installation InfluxDB and Telegraf 安装的是 1.x 版本，并不是 2 的 beta 版 Grafana Configure InfluxDB 创建用户 使用  进入 influxdb 的交互 创建 database…]]></description><link>https://blog.elsagranger.com/influxdb-telegraf-grafana/</link><guid isPermaLink="false">https://blog.elsagranger.com/influxdb-telegraf-grafana/</guid><pubDate>Sat, 07 Nov 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;h3&gt;InfluxDB and Telegraf&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;安装的是 1.x 版本，并不是 2 的 beta 版&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt; -qO- https://repos.influxdata.com/influxdb.key &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; apt-key &lt;span class=&quot;token function&quot;&gt;add&lt;/span&gt; -
+&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;deb https://repos.influxdata.com/ubuntu &lt;span class=&quot;token variable&quot;&gt;${lsb_release -cs}&lt;/span&gt; stable&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;tee&lt;/span&gt; /etc/apt/sources.list.d/influxdb.list
+
+&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; update &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; telegraf influxdb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Grafana&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -y apt-transport-https
+&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -y software-properties-common &lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt; -q -O - https://packages.grafana.com/gpg.key &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; apt-key &lt;span class=&quot;token function&quot;&gt;add&lt;/span&gt; -
+&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;deb https://packages.grafana.com/enterprise/deb stable main&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;tee&lt;/span&gt; -a /etc/apt/sources.list.d/grafana.list &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Configure&lt;/h2&gt;
+&lt;h3&gt;InfluxDB&lt;/h3&gt;
+&lt;h4&gt;创建用户&lt;/h4&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-text&quot;&gt;influx&lt;/code&gt; 进入 influxdb 的交互&lt;/p&gt;
+&lt;h5&gt;创建 database&lt;/h5&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;database&lt;/span&gt; telegraf&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5&gt;创建用户&lt;/h5&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;user&lt;/span&gt; admin &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; password &lt;span class=&quot;token string&quot;&gt;&apos;ROOT PASSWORD&apos;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;privileges&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;user&lt;/span&gt; telegrafuser &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; password &lt;span class=&quot;token string&quot;&gt;&apos;PASSWORD HERE&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5&gt;设置权限&lt;/h5&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;grant&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;on&lt;/span&gt; telegraf &lt;span class=&quot;token keyword&quot;&gt;to&lt;/span&gt; telegrafuser&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;设置认证&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;/etc/influxdb/influxdb.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;[http]
+  # Determines whether HTTP endpoint is enabled.
+  enabled = true
+
+  # The bind address used by the HTTP service.
+  bind-address = &amp;quot;:8086&amp;quot;
+
+  # Determines whether user authentication is enabled over HTTP/HTTPS.
+  auth-enabled = true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Telegraf&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;# 去掉注释
+[[inputs.net]]
+
+# 添加 influxdb 信息
+[[outputs.influxdb]]
+    urls = [&amp;quot;http://influxdb-url&amp;quot;]
+    username = &amp;quot;telegrafuser&amp;quot;
+    password = &amp;quot;PASSWORD HERE&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Grafana&lt;/h3&gt;
+&lt;p&gt;允许匿名访问&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;[auth.anonymous]
+# enable anonymous access
+enabled = true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;InfluxDB&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;show&lt;/span&gt; tag &lt;span class=&quot;token keyword&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;host&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Let's Encrypt 配置]]></title><description><![CDATA[Installation Configure 假设网站为 example.com 在 Nginx/OpenResty 对应的 conf 中添加 添加在 http 下的即可 在  下面创建需要的文件夹 Obain Webroot  为申请者邮箱， 为 webroot…]]></description><link>https://blog.elsagranger.com/letsencrypt/</link><guid isPermaLink="false">https://blog.elsagranger.com/letsencrypt/</guid><pubDate>Sat, 07 Nov 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; certbot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Configure&lt;/h2&gt;
+&lt;p&gt;假设网站为 example.com&lt;/p&gt;
+&lt;p&gt;在 Nginx/OpenResty 对应的 conf 中添加&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;location /.well-known/acme-challenge/ {
+    default_type &amp;quot;text/plain&amp;quot;;
+    root /var/www/html/example.com;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;添加在 http 下的即可&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在 &lt;code class=&quot;language-text&quot;&gt;/var/www/html/example.com&lt;/code&gt; 下面创建需要的文件夹&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;pushd&lt;/span&gt; /var/www/html/example.com
+&lt;span class=&quot;token function&quot;&gt;mkdir&lt;/span&gt; -p .well-known/acme-challenge&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Obain&lt;/h2&gt;
+&lt;h3&gt;Webroot&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;--email&lt;/code&gt; 为申请者邮箱，&lt;code class=&quot;language-text&quot;&gt;--webroot&lt;/code&gt; 为 webroot 方式，&lt;code class=&quot;language-text&quot;&gt;-w&lt;/code&gt; 为站点目录，&lt;code class=&quot;language-text&quot;&gt;-d&lt;/code&gt; 为要加 https 的域名&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;certbot certonly --email root@example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --webroot -w /var/www/html/example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    -d example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    -d www.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Standalone&lt;/h3&gt;
+&lt;p&gt;需要占用 443 端口，需要停止 Nginx 等服务&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;certbot certonly --email admin@example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    --standalone &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    -d example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
+    -d www.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Nginx Conf&lt;/h2&gt;
+&lt;p&gt;生成的证书会在 &lt;code class=&quot;language-text&quot;&gt;/etc/letsencrypt/live/&lt;/code&gt; 下面&lt;/p&gt;
+&lt;p&gt;Nginx Conf 参考&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;server {
+    listen 80;
+    server_name example.com;
+    server_name www.example.com;
+
+    location /.well-known/acme-challenge/ {
+        default_type &amp;quot;text/plain&amp;quot;;
+        root /usr/local/openresty/nginx/html/example.com;
+    }
+
+    location / {
+        return 302 https://$server_name$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name example.com;
+    server_name www.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:3000;
+    }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Auto Renew&lt;/h2&gt;
+&lt;p&gt;在 cron 中添加&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;0 0 * */2 * certbot renew --quiet --post-hook &amp;quot;openresty -s reload&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;每隔两个月，在 0 点 0 分自动续期&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Time Machine Server on Linux]]></title><description><![CDATA[在 Linux 上配置了 Samba 之后，并不能字节用来作为 Time Machine 的备份分区，在 Finder 的 Network 下，直接尝试 Connect As 并不能够连上服务器，只能通过  连接上去。都是用于没有配置 afp 协议。 Installation…]]></description><link>https://blog.elsagranger.com/time-machine-on-linux/</link><guid isPermaLink="false">https://blog.elsagranger.com/time-machine-on-linux/</guid><pubDate>Sat, 21 Nov 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在 Linux 上配置了 Samba 之后，并不能字节用来作为 Time Machine 的备份分区，在 Finder 的 Network 下，直接尝试 Connect As 并不能够连上服务器，只能通过 &lt;code class=&quot;language-text&quot;&gt;cmd + k&lt;/code&gt; 连接上去。都是用于没有配置 afp 协议。&lt;/p&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; netatalk avahi-daemon&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Configure&lt;/h2&gt;
+&lt;h3&gt;netatalk&lt;/h3&gt;
+&lt;p&gt;位置 &lt;code class=&quot;language-text&quot;&gt;/etc/netatalk/afp.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;[Global]
+ dbus daemon = /usr/bin/dbus-daemon
+ disconnect time = 3
+ sleep time = 2
+ log file = /var/log/netatalk.log
+ log level = default:info
+ uam list = uams_dhx2.so
+ zeroconf = yes
+ save password = no
+
+
+[SharedFolder]
+ path = &amp;#39;shared folder path&amp;#39;
+ ; http://netatalk.sourceforge.net/wiki/index.php/Spotlight
+ ; spotlight = yes
+ valid users = USERNAME1 USERNAME2 USERNAME3
+ unix priv = yes
+ file perm = 0600
+
+[TimeCapsule]
+path = &amp;#39;time machine folder&amp;#39;
+valid users = USERNAME2
+time machine = yes
+unix priv = yes
+file perm = 0600&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;avahi&lt;/h3&gt;
+&lt;p&gt;添加 afp 协议 &lt;/p&gt;
+&lt;p&gt;位置 &lt;code class=&quot;language-text&quot;&gt;/etc/avahi/services/timecapsule_afpd.service&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;xml&quot;&gt;&lt;pre class=&quot;language-xml&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&lt;span class=&quot;token prolog&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; standalone=&apos;no&apos;?&gt;&lt;/span&gt;
+&lt;span class=&quot;token doctype&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;!&lt;/span&gt;&lt;span class=&quot;token doctype-tag&quot;&gt;DOCTYPE&lt;/span&gt; &lt;span class=&quot;token name&quot;&gt;service-group&lt;/span&gt; &lt;span class=&quot;token name&quot;&gt;SYSTEM&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;avahi-service.dtd&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;service-group&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;name&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;replace-wildcards&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;yes&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;%h&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;_afpovertcp._tcp&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;548&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;_device-info._tcp&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;0&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;txt-record&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;model=TimeCapsule&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;txt-record&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;service-group&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[在 Android Things 上安装 Debian]]></title><description><![CDATA[Android Things 有两个官方支持的版本，一个是 ，另一个是 。后者没有什么可说的，主要是前者应该当如何安装。 主要参考了这个文章 Toolchain 我们需要的有：，， imx_usb_loader ARM Cross Compiler: GCC…]]></description><link>https://blog.elsagranger.com/imx7d-debian/</link><guid isPermaLink="false">https://blog.elsagranger.com/imx7d-debian/</guid><pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Android Things 有两个官方支持的版本，一个是 &lt;code class=&quot;language-text&quot;&gt;NXP i.MX7D&lt;/code&gt;，另一个是 &lt;code class=&quot;language-text&quot;&gt;Raspberry Pi&lt;/code&gt;。后者没有什么可说的，主要是前者应该当如何安装。&lt;/p&gt;
 &lt;p&gt;主要参考了&lt;a href=&quot;https://www.digikey.com/eewiki/display/linuxonarm/PICO-PI-IMX7&quot;&gt;这个文章&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Toolchain&lt;/h2&gt;
 &lt;p&gt;我们需要的有：&lt;code class=&quot;language-text&quot;&gt;imx_usb_loader&lt;/code&gt;，&lt;code class=&quot;language-text&quot;&gt;ARM Cross Compiler: GCC&lt;/code&gt;，&lt;code class=&quot;language-text&quot;&gt;Bootloader: U-Boot&lt;/code&gt;&lt;/p&gt;
@@ -472,165 +633,4 @@ Ctrl+C to exit ...
 &lt;p&gt;使用 &lt;code class=&quot;language-text&quot;&gt;ip a&lt;/code&gt; 可以看到&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;wlan0: &amp;lt;NO-CARRIER,BROADCAST,MULTICAST,DYNAMIC,UP&amp;gt; mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
    link/ether b0:f1:ec:xx:xx:xx brd ff:ff:ff:ff:ff:ff&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;不过现在还不知道怎么把这个网卡 UP 起来&lt;/p&gt;</content:encoded></item><item><title><![CDATA[InfluxDB Telegraf Grafana 配置]]></title><description><![CDATA[Installation InfluxDB and Telegraf 安装的是 1.x 版本，并不是 2 的 beta 版 Grafana Configure InfluxDB 创建用户 使用  进入 influxdb 的交互 创建 database…]]></description><link>https://blog.elsagranger.com/influxdb-telegraf-grafana/</link><guid isPermaLink="false">https://blog.elsagranger.com/influxdb-telegraf-grafana/</guid><pubDate>Sat, 07 Nov 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;h3&gt;InfluxDB and Telegraf&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;安装的是 1.x 版本，并不是 2 的 beta 版&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt; -qO- https://repos.influxdata.com/influxdb.key &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; apt-key &lt;span class=&quot;token function&quot;&gt;add&lt;/span&gt; -
-&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;deb https://repos.influxdata.com/ubuntu &lt;span class=&quot;token variable&quot;&gt;${lsb_release -cs}&lt;/span&gt; stable&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;tee&lt;/span&gt; /etc/apt/sources.list.d/influxdb.list
-
-&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; update &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; telegraf influxdb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Grafana&lt;/h3&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -y apt-transport-https
-&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt-get&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -y software-properties-common &lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt;
-&lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt; -q -O - https://packages.grafana.com/gpg.key &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; apt-key &lt;span class=&quot;token function&quot;&gt;add&lt;/span&gt; -
-&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;deb https://packages.grafana.com/enterprise/deb stable main&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;tee&lt;/span&gt; -a /etc/apt/sources.list.d/grafana.list &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Configure&lt;/h2&gt;
-&lt;h3&gt;InfluxDB&lt;/h3&gt;
-&lt;h4&gt;创建用户&lt;/h4&gt;
-&lt;p&gt;使用 &lt;code class=&quot;language-text&quot;&gt;influx&lt;/code&gt; 进入 influxdb 的交互&lt;/p&gt;
-&lt;h5&gt;创建 database&lt;/h5&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;database&lt;/span&gt; telegraf&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h5&gt;创建用户&lt;/h5&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;user&lt;/span&gt; admin &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; password &lt;span class=&quot;token string&quot;&gt;&apos;ROOT PASSWORD&apos;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;privileges&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;user&lt;/span&gt; telegrafuser &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; password &lt;span class=&quot;token string&quot;&gt;&apos;PASSWORD HERE&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h5&gt;设置权限&lt;/h5&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;grant&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;on&lt;/span&gt; telegraf &lt;span class=&quot;token keyword&quot;&gt;to&lt;/span&gt; telegrafuser&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4&gt;设置认证&lt;/h4&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;/etc/influxdb/influxdb.conf&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;[http]
-  # Determines whether HTTP endpoint is enabled.
-  enabled = true
-
-  # The bind address used by the HTTP service.
-  bind-address = &amp;quot;:8086&amp;quot;
-
-  # Determines whether user authentication is enabled over HTTP/HTTPS.
-  auth-enabled = true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Telegraf&lt;/h3&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;# 去掉注释
-[[inputs.net]]
-
-# 添加 influxdb 信息
-[[outputs.influxdb]]
-    urls = [&amp;quot;http://influxdb-url&amp;quot;]
-    username = &amp;quot;telegrafuser&amp;quot;
-    password = &amp;quot;PASSWORD HERE&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Grafana&lt;/h3&gt;
-&lt;p&gt;允许匿名访问&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;[auth.anonymous]
-# enable anonymous access
-enabled = true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;InfluxDB&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;show&lt;/span&gt; tag &lt;span class=&quot;token keyword&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;host&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Let's Encrypt 配置]]></title><description><![CDATA[Installation Configure 假设网站为 example.com 在 Nginx/OpenResty 对应的 conf 中添加 添加在 http 下的即可 在  下面创建需要的文件夹 Obain Webroot  为申请者邮箱， 为 webroot…]]></description><link>https://blog.elsagranger.com/letsencrypt/</link><guid isPermaLink="false">https://blog.elsagranger.com/letsencrypt/</guid><pubDate>Sat, 07 Nov 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; certbot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Configure&lt;/h2&gt;
-&lt;p&gt;假设网站为 example.com&lt;/p&gt;
-&lt;p&gt;在 Nginx/OpenResty 对应的 conf 中添加&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;location /.well-known/acme-challenge/ {
-    default_type &amp;quot;text/plain&amp;quot;;
-    root /var/www/html/example.com;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;添加在 http 下的即可&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;在 &lt;code class=&quot;language-text&quot;&gt;/var/www/html/example.com&lt;/code&gt; 下面创建需要的文件夹&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;pushd&lt;/span&gt; /var/www/html/example.com
-&lt;span class=&quot;token function&quot;&gt;mkdir&lt;/span&gt; -p .well-known/acme-challenge&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Obain&lt;/h2&gt;
-&lt;h3&gt;Webroot&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;--email&lt;/code&gt; 为申请者邮箱，&lt;code class=&quot;language-text&quot;&gt;--webroot&lt;/code&gt; 为 webroot 方式，&lt;code class=&quot;language-text&quot;&gt;-w&lt;/code&gt; 为站点目录，&lt;code class=&quot;language-text&quot;&gt;-d&lt;/code&gt; 为要加 https 的域名&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;certbot certonly --email root@example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
-    --webroot -w /var/www/html/example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
-    -d example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
-    -d www.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Standalone&lt;/h3&gt;
-&lt;p&gt;需要占用 443 端口，需要停止 Nginx 等服务&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;certbot certonly --email admin@example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
-    --standalone &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
-    -d example.com &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;
-    -d www.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Nginx Conf&lt;/h2&gt;
-&lt;p&gt;生成的证书会在 &lt;code class=&quot;language-text&quot;&gt;/etc/letsencrypt/live/&lt;/code&gt; 下面&lt;/p&gt;
-&lt;p&gt;Nginx Conf 参考&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;server {
-    listen 80;
-    server_name example.com;
-    server_name www.example.com;
-
-    location /.well-known/acme-challenge/ {
-        default_type &amp;quot;text/plain&amp;quot;;
-        root /usr/local/openresty/nginx/html/example.com;
-    }
-
-    location / {
-        return 302 https://$server_name$request_uri;
-    }
-}
-
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    server_name example.com;
-    server_name www.example.com;
-
-    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-
-    location / {
-        include proxy_params;
-        proxy_pass http://127.0.0.1:3000;
-    }
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Auto Renew&lt;/h2&gt;
-&lt;p&gt;在 cron 中添加&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;0 0 * */2 * certbot renew --quiet --post-hook &amp;quot;openresty -s reload&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;每隔两个月，在 0 点 0 分自动续期&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Time Machine Server on Linux]]></title><description><![CDATA[在 Linux 上配置了 Samba 之后，并不能字节用来作为 Time Machine 的备份分区，在 Finder 的 Network 下，直接尝试 Connect As 并不能够连上服务器，只能通过  连接上去。都是用于没有配置 afp 协议。 Installation…]]></description><link>https://blog.elsagranger.com/time-machine-on-linux/</link><guid isPermaLink="false">https://blog.elsagranger.com/time-machine-on-linux/</guid><pubDate>Sat, 21 Nov 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在 Linux 上配置了 Samba 之后，并不能字节用来作为 Time Machine 的备份分区，在 Finder 的 Network 下，直接尝试 Connect As 并不能够连上服务器，只能通过 &lt;code class=&quot;language-text&quot;&gt;cmd + k&lt;/code&gt; 连接上去。都是用于没有配置 afp 协议。&lt;/p&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; netatalk avahi-daemon&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Configure&lt;/h2&gt;
-&lt;h3&gt;netatalk&lt;/h3&gt;
-&lt;p&gt;位置 &lt;code class=&quot;language-text&quot;&gt;/etc/netatalk/afp.conf&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;conf&quot;&gt;&lt;pre class=&quot;language-conf&quot;&gt;&lt;code class=&quot;language-conf&quot;&gt;[Global]
- dbus daemon = /usr/bin/dbus-daemon
- disconnect time = 3
- sleep time = 2
- log file = /var/log/netatalk.log
- log level = default:info
- uam list = uams_dhx2.so
- zeroconf = yes
- save password = no
-
-
-[SharedFolder]
- path = &amp;#39;shared folder path&amp;#39;
- ; http://netatalk.sourceforge.net/wiki/index.php/Spotlight
- ; spotlight = yes
- valid users = USERNAME1 USERNAME2 USERNAME3
- unix priv = yes
- file perm = 0600
-
-[TimeCapsule]
-path = &amp;#39;time machine folder&amp;#39;
-valid users = USERNAME2
-time machine = yes
-unix priv = yes
-file perm = 0600&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;avahi&lt;/h3&gt;
-&lt;p&gt;添加 afp 协议 &lt;/p&gt;
-&lt;p&gt;位置 &lt;code class=&quot;language-text&quot;&gt;/etc/avahi/services/timecapsule_afpd.service&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;xml&quot;&gt;&lt;pre class=&quot;language-xml&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&lt;span class=&quot;token prolog&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; standalone=&apos;no&apos;?&gt;&lt;/span&gt;
-&lt;span class=&quot;token doctype&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;!&lt;/span&gt;&lt;span class=&quot;token doctype-tag&quot;&gt;DOCTYPE&lt;/span&gt; &lt;span class=&quot;token name&quot;&gt;service-group&lt;/span&gt; &lt;span class=&quot;token name&quot;&gt;SYSTEM&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;avahi-service.dtd&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;service-group&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;name&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;replace-wildcards&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;yes&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;%h&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;_afpovertcp._tcp&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;548&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;_device-info._tcp&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;0&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;port&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;txt-record&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;model=TimeCapsule&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;txt-record&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
- &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;service&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;service-group&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;不过现在还不知道怎么把这个网卡 UP 起来&lt;/p&gt;</content:encoded></item></channel></rss>
