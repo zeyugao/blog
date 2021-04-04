@@ -439,7 +439,7 @@ Ctrl+C to exit ...
 
 通过 `dmesg` 可以检查到 brcmfmac 的驱动启动时缺少 `brcmfmac4339-sdio.txt` 和 `brcmfmac4339-sdio.technexion,imx7d-pico-pi.txt` 两个文件。
 
-在[网络](https://fossies.org/linux/buildroot/board/technexion/imx7dpico/rootfs_overlay/lib/firmware/brcm/brcmfmac4339-sdio.txt)上可以找到 `brcmfmac4339-sdio.txt` 文件，将其放进 `/lib/firmware/bcrm` 目录下，重启。
+在[网络](https://raw.githubusercontent.com/buildroot/buildroot/master/board/technexion/imx7dpico/rootfs_overlay/lib/firmware/brcm/brcmfmac4339-sdio.txt)上可以找到 `brcmfmac4339-sdio.txt` 文件，将其放进 `/lib/firmware/bcrm` 目录下，重启。
 
 使用 `ip a` 可以看到
 
@@ -448,4 +448,29 @@ wlan0: <NO-CARRIER,BROADCAST,MULTICAST,DYNAMIC,UP> mtu 1500 qdisc pfifo_fast sta
    link/ether b0:f1:ec:xx:xx:xx brd ff:ff:ff:ff:ff:ff
 ```
 
-不过现在还不知道怎么把这个网卡 UP 起来
+`ifconfig wlan up` 会显示 `SIOCSIFFLAGS: Operation not possible due to RF-kill`
+
+安装 `rfkill`（如果有必要）：`apt install rfkill`
+
+`rfkill list all` 会显示
+
+```shell
+0: hci0: Bluetooth
+        Soft blocked: no
+        Hard blocked: no
+1: phy0: Wireless LAN
+        Soft blocked: no
+        Hard blocked: no
+```
+
+参考[这个问题](https://bbs.archlinux.org/viewtopic.php?pid=1324810#p1324810)
+
+```shell
+echo "blacklist hp_wmi" > /etc/modprobe.d/hp.conf
+```
+
+重启再输入即可
+
+```shell
+rfkill unblock all
+```
