@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Elsa Granger]]></title><description><![CDATA[Elsa Granger Personal Page]]></description><link>https://blog.elsagranger.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 27 Mar 2021 07:00:36 GMT</lastBuildDate><item><title><![CDATA[OpenVPN to Shadowsocks]]></title><description><![CDATA[OpenVPN 转 SOCKS 安装 使用 docker-openvpn-client-socks 可以直接  启动，或者修改  其中，去掉了要求 tty 的参数，便于添加为 systemd 服务 使用 docker build 镜像 之后就可以使用 curl…]]></description><link>https://blog.elsagranger.com/openvpn-socks-shadowsocks/</link><guid isPermaLink="false">https://blog.elsagranger.com/openvpn-socks-shadowsocks/</guid><pubDate>Sat, 27 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;OpenVPN 转 SOCKS&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Elsa Granger]]></title><description><![CDATA[Elsa Granger Personal Page]]></description><link>https://blog.elsagranger.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 04 Apr 2021 11:53:38 GMT</lastBuildDate><item><title><![CDATA[OpenVPN to Shadowsocks]]></title><description><![CDATA[OpenVPN 转 SOCKS 安装 使用 docker-openvpn-client-socks 可以直接  启动，或者修改  其中，去掉了要求 tty 的参数，便于添加为 systemd 服务 使用 docker build 镜像 之后就可以使用 curl…]]></description><link>https://blog.elsagranger.com/openvpn-socks-shadowsocks/</link><guid isPermaLink="false">https://blog.elsagranger.com/openvpn-socks-shadowsocks/</guid><pubDate>Sat, 27 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;OpenVPN 转 SOCKS&lt;/h2&gt;
 &lt;h3&gt;安装&lt;/h3&gt;
 &lt;p&gt;使用 &lt;a href=&quot;https://github.com/kizzx2/docker-openvpn-client-socks&quot;&gt;docker-openvpn-client-socks&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;可以直接 &lt;code class=&quot;language-text&quot;&gt;./start PATH-TO-OVPN-CONF&lt;/code&gt; 启动，或者修改 &lt;code class=&quot;language-text&quot;&gt;start&lt;/code&gt;&lt;/p&gt;
@@ -629,8 +629,20 @@ Ctrl+C to exit ...
 &lt;h2&gt;WLAN&lt;/h2&gt;
 &lt;p&gt;安装完后，仍然只能使用 LAN 联网，&lt;code class=&quot;language-text&quot;&gt;ip a&lt;/code&gt;下面无法出现 wlan0。&lt;/p&gt;
 &lt;p&gt;通过 &lt;code class=&quot;language-text&quot;&gt;dmesg&lt;/code&gt; 可以检查到 brcmfmac 的驱动启动时缺少 &lt;code class=&quot;language-text&quot;&gt;brcmfmac4339-sdio.txt&lt;/code&gt; 和 &lt;code class=&quot;language-text&quot;&gt;brcmfmac4339-sdio.technexion,imx7d-pico-pi.txt&lt;/code&gt; 两个文件。&lt;/p&gt;
-&lt;p&gt;在&lt;a href=&quot;https://fossies.org/linux/buildroot/board/technexion/imx7dpico/rootfs_overlay/lib/firmware/brcm/brcmfmac4339-sdio.txt&quot;&gt;网络&lt;/a&gt;上可以找到 &lt;code class=&quot;language-text&quot;&gt;brcmfmac4339-sdio.txt&lt;/code&gt; 文件，将其放进 &lt;code class=&quot;language-text&quot;&gt;/lib/firmware/bcrm&lt;/code&gt; 目录下，重启。&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&quot;https://raw.githubusercontent.com/buildroot/buildroot/master/board/technexion/imx7dpico/rootfs_overlay/lib/firmware/brcm/brcmfmac4339-sdio.txt&quot;&gt;网络&lt;/a&gt;上可以找到 &lt;code class=&quot;language-text&quot;&gt;brcmfmac4339-sdio.txt&lt;/code&gt; 文件，将其放进 &lt;code class=&quot;language-text&quot;&gt;/lib/firmware/bcrm&lt;/code&gt; 目录下，重启。&lt;/p&gt;
 &lt;p&gt;使用 &lt;code class=&quot;language-text&quot;&gt;ip a&lt;/code&gt; 可以看到&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;wlan0: &amp;lt;NO-CARRIER,BROADCAST,MULTICAST,DYNAMIC,UP&amp;gt; mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
    link/ether b0:f1:ec:xx:xx:xx brd ff:ff:ff:ff:ff:ff&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;不过现在还不知道怎么把这个网卡 UP 起来&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;ifconfig wlan up&lt;/code&gt; 会显示 &lt;code class=&quot;language-text&quot;&gt;SIOCSIFFLAGS: Operation not possible due to RF-kill&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装 &lt;code class=&quot;language-text&quot;&gt;rfkill&lt;/code&gt;（如果有必要）：&lt;code class=&quot;language-text&quot;&gt;apt install rfkill&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;rfkill list all&lt;/code&gt; 会显示&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;: hci0: Bluetooth
+        Soft blocked: no
+        Hard blocked: no
+&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;: phy0: Wireless LAN
+        Soft blocked: no
+        Hard blocked: no&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;参考&lt;a href=&quot;https://bbs.archlinux.org/viewtopic.php?pid=1324810#p1324810&quot;&gt;这个问题&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;blacklist hp_wmi&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; /etc/modprobe.d/hp.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;重启再输入即可&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;rfkill unblock all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item></channel></rss>
