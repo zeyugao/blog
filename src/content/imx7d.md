@@ -173,3 +173,5 @@ sudo touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
 ```
 
 重启之后就正常了。
+
+[这个文章](https://jbit.net/NetworkManager_Strictly_Unmanaged/)里面提到了一些 NetworkManager 的配置
