@@ -1,0 +1,6 @@
+- name: Elsa Granger
+  featured: true
+  bio: Undergraduate of Information Security in USTC
+  avatar: ./avatars/elsagranger-head.jpeg
+  social:
+    - url: https://github.com/zeyugao

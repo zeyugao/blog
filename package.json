@@ -1,8 +1,16 @@
 {
+  "name": "elsa-blog",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "dev": "gatsby develop",
+    "clean": "gatsby clean"
+  },
   "dependencies": {
     "@narative/gatsby-theme-novela": "^0.18.7",
-    "gatsby": "^3.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "gatsby": "^2.13.41",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
