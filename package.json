@@ -10,7 +10,9 @@
   "dependencies": {
     "@narative/gatsby-theme-novela": "^0.18.7",
     "gatsby": "^2.13.41",
+    "gatsby-remark-admonitions": "^0.1.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "remark-admonitions": "^1.2.1"
   }
 }

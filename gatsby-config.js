@@ -19,5 +19,15 @@ module.exports = {
       },
     ],
   },
-  plugins: ['@narative/gatsby-theme-novela'],
+  plugins: [
+    '@narative/gatsby-theme-novela',
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+            "gatsby-remark-admonitions"
+        ],
+      },
+    },
+  ],
 };
