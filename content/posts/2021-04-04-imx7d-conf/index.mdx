@@ -1,0 +1,178 @@
+---
+title: imx7d 一些配置
+author: Elsa Granger
+hero: ./images/nxp-pico7-board.png
+date: 2020-09-20
+excerpt: imx7d 的一些配置，包含 GPIO、I2C、bme280、网络以及 WireGuard
+---
+
+## GPIO
+
+PINOUT 的参考为 [I/O Pinouts](https://developer.android.com/things/hardware/imx7d)
+
+GPIO2_IO00 对应的是 sysfs 中的 `(2-1)*32 + 0`，或者 chardev 的 `/dev/gpiochip1` 的 `line=0`
+
+```shell
+echo 32 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio32/direction
+echo 1 > /sys/class/gpio/gpio32/value
+```
+
+```python
+from periphery import GPIO
+import time
+
+r = GPIO("/dev/gpiochip1", 0, "out")
+g = GPIO("/dev/gpiochip1", 5, "out")
+b = GPIO("/dev/gpiochip1", 7, "out")
+
+while True:
+    for i in range(7):
+        r.write(i%2==0)
+        g.write((i>>1)%2==0)
+        b.write((i>>2)%2==0)
+        time.sleep(0.2)
+
+r.close()
+g.close()
+b.close()
+```
+
+## bme280
+
+将 i2c 的接口接在 i2c-0 上，使用 `i2cdetect` 得到
+
+```txt
+elsa@imx7d:~$ i2cdetect -y 0
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- UU -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- 77
+```
+
+说明在 i2c-0 上的 0x77 位置。同样也可以扫 i2c-1 和 i2c-3，但是就没有。
+
+```txt
+elsa@imx7d:~$ i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+```
+
+```txt
+elsa@imx7d:~$ i2cdetect -y 3
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- UU -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+```
+
+如果强制全部扫描，那么就是如下的结果
+
+```txt
+elsa@imx7d:~$ i2cdetect -y -a 0
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00: 00 -- -- -- -- -- -- -- -- -- UU -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- 77 -- -- -- -- -- -- -- --
+elsa@imx7d:~$ i2cdetect -y -a 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00: 00 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+elsa@imx7d:~$ i2cdetect -y -a 3
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00: 00 -- -- -- -- -- -- -- UU -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+```
+
+没有测试 0x00 能不能用
+
+得到 i2c 的配置，就可以用 [RPi.bme280](https://github.com/rm-hull/bme280) 得到数据，其中结果打印成了 influx line protocol便于被 telegraf 读取。
+
+```python
+import smbus2
+import bme280
+
+port = 0
+address = 0x77
+bus = smbus2.SMBus(port)
+
+calibration_params = bme280.load_calibration_params(bus, address)
+data = bme280.sample(bus, address, calibration_params)
+
+print('environment,location=lug206 temperature={},pressure={},humidity={} {}'.format(
+    data.temperature,
+    data.pressure,
+    data.humidity,
+    int(data.timestamp.timestamp() * 1000 * 1000 * 1000)
+))
+```
+
+## 网络
+
+用 wpa_supplicant 只能 hdcp 到 ipv6 的地址，尝试了 [Arch Wiki 的 wpa_supplicant 页面](https://wiki.archlinux.org/index.php/wpa_supplicant#At_boot_(systemd))中提到的几种方法，
+都会有 `/run/wpa_supplicant/wlan0` 和 `/var/run/wpa_supplicant/wlan0` 被占用的情况。不过把整个系统重启安装之后，第一次启动并没有出现这两个文件。
+可能是因为之前的 NetworkManager 遗留的问题，不要安装 NetworkManager 只用 systemd-networkd 应该会正常。不过没有尝试了。
+
+最后直接用 NetworkManager 来连接，会有设置了静态 IP 之后仍然会有 DHCP 得到的一个 IP 地址的问题。
+
+同时使用 NetworkManager 也可以直接管理 WireGuard。
+
+## WireGuard
+
+WireGuard 被编译进了内核，就不需要添加内核模块
+
+参考[这个文章](https://blogs.gnome.org/thaller/2019/03/15/wireguard-in-networkmanager/)可以得到如何使用 NetworkManager 来导入 WireGuard 的配置。
+
+但是直接 `up` 会出错
+
+```txt
+elsa@imx7d:~$ sudo nmcli connection up wg.elsa.imx7d
+Error: Connection activation failed: Activation failed because the device is unmanaged
+
+elsa@imx7d:~$ sudo nmcli connection up wg.elsa.imx7d
+Error: Connection activation failed: Connection 'wg.elsa.imx7d' is not available on device wg.elsa.imx7d because device is strictly unmanaged
+```
+
+用了[这个回答](https://askubuntu.com/a/1075112)，强制加载类型为 none 的设备
+
+```shell
+sudo touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
+```
+
+重启之后就正常了。
+
+[这个文章](https://jbit.net/NetworkManager_Strictly_Unmanaged/)里面提到了一些 NetworkManager 的配置
