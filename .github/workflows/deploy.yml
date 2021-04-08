@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+      - run: yarn
+      - run: npm run build
+      - name: Deploy to GitHub Pages
+        run: |
+          CINFO="$(git log -1 --pretty="%an: [%h] %s")"
+          git clone --depth=1 --branch=gh-pages --single-branch --no-checkout \
+            "https://${GITHUB_ACTOR}:${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" tmp
+          mv tmp/.git public/.git && rm -rf tmp/
+          pushd public/ &>/dev/null
+          echo blog.elsagranger.com > CNAME
+          git add -A
+          git -c user.name=GitHub -c user.email=noreply@github.com commit \
+            -m "Auto deploy from GitHub Actions build ${GITHUB_RUN_NUMBER}" \
+            -m "$CINFO"
+          git push
+          popd &>/dev/null
