@@ -285,6 +285,11 @@
   );
 }
 
+.notion-table {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 .notion-brown_background {
   /* dark blue */
   background-image: linear-gradient(
