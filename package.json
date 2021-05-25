@@ -51,7 +51,7 @@
     "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^10.2.0",
+    "@next/bundle-analyzer": "^10.2.3",
     "@types/classnames": "^2.3.1",
     "@types/node": "^15.6.1",
     "@types/node-fetch": "^2.5.10",
