@@ -156,7 +156,7 @@
 
 .notion-title {
   display: block;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .notion-collection-column-title {
@@ -315,6 +315,10 @@
 .notion-page-icon-wrapper img.notion-page-icon {
   border-radius: 50%;
   box-shadow: 0 8px 40px 0 rgb(0 0 0 / 21%);
+}
+
+.notion-page-icon-wrapper {
+  justify-content: start;
 }
 
 .notion-header {
