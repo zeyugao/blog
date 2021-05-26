@@ -24,7 +24,6 @@ const generateRss = (posts: Post[]) => {
     })
 
     posts.forEach(post => {
-        console.log(post.Published)
         if (post.Published) {
             feed.addItem({
                 title: post.Name,
@@ -53,7 +52,6 @@ const getAllPosts = async (): Promise<Post[]> => {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     if (res) {
         const posts = await getAllPosts()
-        console.log(posts);
         const xmlFeed = generateRss(posts)
 
         res.setHeader('Content-Type', 'text/xml')
