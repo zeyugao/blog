@@ -8,7 +8,7 @@ module.exports = {
 
   // basic site info (required)
   name: 'Elsa\'s Blog',
-  domain: 'elsagranger.com',
+  domain: 'www.elsagranger.com',
   author: 'Elsa Granger',
 
   // open graph metadata (optional)
