@@ -39,7 +39,7 @@
     "next-transpile-modules": "^7.2.0",
     "node-fetch": "^2.6.1",
     "notion-client": "^4.6.2",
-    "notion-types": "^4.3.0",
+    "notion-types": "^4.6.4",
     "notion-utils": "^4.5.2",
     "p-map": "^5.0.0",
     "p-memoize": "^4.0.0",
