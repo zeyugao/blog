@@ -3796,17 +3796,17 @@ notion-client@^4.6.4:
     notion-utils "^4.6.4"
     p-map "^4.0.0"
 
-notion-types@^4.6.4:
-  version "4.6.4"
-  resolved "https://registry.yarnpkg.com/notion-types/-/notion-types-4.6.4.tgz#2c52401ccccec676a713b24bf4c4d0cc048fa82b"
-  integrity sha512-ECNWgmhxiamT99n5xYk9EsyXX7fROfgdukjaIhEpJedw6ACxI9tRzMFe4iDTFUWQ72sdqV7/7Dru3EpXZfsp1Q==
+notion-types@^4.6.4, notion-types@^4.7.6:
+  version "4.7.6"
+  resolved "https://registry.yarnpkg.com/notion-types/-/notion-types-4.7.6.tgz#4ed4a9d25c329aa32f8714d0eb67cf1b14af0278"
+  integrity sha512-YFPDcKRpokoxK/RjP5P/+UeUbYSmt5+KlLAPPZl+MDxuzeKOqtt6NJIZfng4ji3BI/e0t/m7eA0EfAw6d2U37w==
 
-notion-utils@^4.6.4:
-  version "4.6.4"
-  resolved "https://registry.yarnpkg.com/notion-utils/-/notion-utils-4.6.4.tgz#0b2733e39d55c6c308b1ae9363acc0df8e57c7f0"
-  integrity sha512-JrjppnvGtgAT572HkuU+Rb6+sL+mh6vgQ3HWijjAh7yMY2akGj0jHUO/W2SuhBM1ILZU5fq+9U80AgEdNykrBw==
+notion-utils@^4.6.4, notion-utils@^4.7.6:
+  version "4.7.6"
+  resolved "https://registry.yarnpkg.com/notion-utils/-/notion-utils-4.7.6.tgz#79aa2be19ae08fb6e44971d855af71e22608a47a"
+  integrity sha512-sMO8jvMGoDxKHSSu2dbq9m/bWFOloQSMWPuDvzFd1+35xqxWLGFJUmCuumInryxBmUb3XQfgDItpPub0FlyQZw==
   dependencies:
-    notion-types "^4.6.4"
+    notion-types "^4.7.6"
     p-queue "^6.6.1"
 
 npm-run-all@^4.1.5:
@@ -4548,10 +4548,10 @@ react-modal@^3.11.2:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
-react-notion-x@^4.6.5:
-  version "4.6.5"
-  resolved "https://registry.yarnpkg.com/react-notion-x/-/react-notion-x-4.6.5.tgz#904747cc80782335cff6ededab36d7248deebd6b"
-  integrity sha512-YxIjHz19Dm+8nakFOtX4Ml2KFtO4qO7Zp/v6Eb5xec9ZYsqksxa/cL8BOfgBElkJtB00inNCJY/ckjAu7sYENg==
+react-notion-x@^4.7.7:
+  version "4.7.7"
+  resolved "https://registry.yarnpkg.com/react-notion-x/-/react-notion-x-4.7.7.tgz#eaa6f8a671346e7d3a56842bfa1e19ffba75d090"
+  integrity sha512-HA81KrbHQwYpgulx2VvfBzmFX+f9V4Vk2/SgBup+Claizq48i9vpFXVJm1KaSttd9Id9TMPeabKZN5TZdmJ1SA==
   dependencies:
     "@matejmazur/react-katex" "^3.1.3"
     date-fns "^2.15.0"
@@ -4560,8 +4560,8 @@ react-notion-x@^4.6.5:
     katex "^0.12.0"
     lodash.throttle "^4.1.1"
     medium-zoom "^1.0.6"
-    notion-types "^4.6.4"
-    notion-utils "^4.6.4"
+    notion-types "^4.7.6"
+    notion-utils "^4.7.6"
     prismjs "^1.20.0"
     rc-dropdown "^3.1.2"
     rc-menu "^8.5.2"
